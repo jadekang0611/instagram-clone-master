@@ -3,7 +3,7 @@ import IconSheet from "./images/icon-sheet.png";
 import IconSheet2 from "./images/icon-sheet-2.png";
 
 /* Feed page: /pages/feed.js */
-export const useFeedPageStyles = makeStyles(theme => ({
+export const useFeedPageStyles = makeStyles((theme) => ({
   container: {
     display: "grid",
     // gridAutoFlow: "column",
@@ -11,60 +11,67 @@ export const useFeedPageStyles = makeStyles(theme => ({
     gridGap: 35,
     [theme.breakpoints.down("sm")]: {
       gridTemplateColumns: "minmax(auto, 600px)",
-      justifyContent: "center"
+      justifyContent: "center",
     },
     "&.slickSlider": {
-      display: "grid"
-    }
+      display: "grid",
+    },
   },
   sidebarContainer: {
     display: "grid",
     margin: "0px 28px 24px",
     justifyContent: "center",
-    gridTemplateColumns: "minmax(auto, 300px)"
+    gridTemplateColumns: "minmax(auto, 300px)",
   },
-  sidebarWrapper: { position: "fixed", width: 293 }
+  sidebarWrapper: { position: "fixed", width: 293 },
 }));
 
 const iconProps = {
   backgroundImage: `url(${IconSheet2})`,
   backgroundRepeat: "no-repeat",
-  height: 12
+  height: 12,
 };
 
 /* ExploreSuggestions component: /components/explore/ExploreSuggestions.js */
-export const useExploreSuggestionsStyles = makeStyles(theme => ({
+export const useExploreSuggestionsStyles = makeStyles((theme) => ({
   container: {
-    width: 935
+    width: 935,
   },
   typography: {
     fontWeight: "bold !important",
     marginBottom: theme.spacing(2),
-    marginLeft: theme.spacing(1)
-  }
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 /* ExploreGrid component: /components/explore/ExploreGrid.js */
-export const useExploreGridStyles = makeStyles(theme => ({
+export const useExploreGridStyles = makeStyles((theme) => ({
   article: {
     display: "grid",
     gridTemplateColumns: "minmax(auto, 935px)",
-    width: "100vw"
+    width: "100vw",
   },
   postContainer: {
     [theme.breakpoints.down("sm")]: {
-      gridGap: 2
+      gridGap: 2,
     },
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)",
-    gridGap: 20
+    gridGap: 20,
   },
   typography: {
     fontWeight: "bold !important",
     marginBottom: theme.spacing(2),
-    marginLeft: theme.spacing(1)
-  }
+    marginLeft: theme.spacing(1),
+  },
 }));
+
+/* Not Found page: /pages/not-found.js */
+export const useNotFoundPageStyles = makeStyles({
+  link: {
+    textDecoration: "none",
+  },
+});
 
 /* Login page: /pages/login.js */
 export const useLoginPageStyles = makeStyles({
@@ -74,17 +81,17 @@ export const useLoginPageStyles = makeStyles({
     marginBottom: 10,
     display: "grid",
     alignItems: "center",
-    gridTemplateColumns: "2fr 1fr"
+    gridTemplateColumns: "2fr 1fr",
   },
   card: {
     maxWidth: 348,
     padding: "16px 40px",
-    marginBottom: 10
+    marginBottom: 10,
   },
   section: {
     display: "grid",
     placeItems: "center",
-    height: "100vh"
+    height: "100vh",
   },
   cardHeader: {
     backgroundImage: `url(${IconSheet})`,
@@ -92,34 +99,34 @@ export const useLoginPageStyles = makeStyles({
     backgroundPosition: "-98px 0",
     height: 51,
     width: 175,
-    margin: "22px auto 12px"
+    margin: "22px auto 12px",
   },
   textField: {
-    marginBottom: 6
+    marginBottom: 6,
   },
   button: {
-    margin: "8px 0px"
+    margin: "8px 0px",
   },
   typography: {
-    margin: "10px 0px"
+    margin: "10px 0px",
   },
   orContainer: {
     margin: "10px 0px",
     display: "grid",
     gridTemplateColumns: "1fr auto 1fr",
     gridGap: 18,
-    placeItems: "center"
+    placeItems: "center",
   },
   orLine: {
     justifySelf: "stretch",
     height: 1,
-    background: "#e6e6e6"
+    background: "#e6e6e6",
   },
   facebookIcon: {
     height: 16,
     width: 16,
-    marginRight: 8
-  }
+    marginRight: 8,
+  },
 });
 
 // SignUp page: /pages/signup.js
@@ -128,7 +135,7 @@ export const useSignUpPageStyles = makeStyles({
   section: {
     display: "grid",
     placeItems: "center",
-    height: "100vh"
+    height: "100vh",
   },
   cardHeader: {
     backgroundImage: `url(${IconSheet})`,
@@ -136,32 +143,32 @@ export const useSignUpPageStyles = makeStyles({
     backgroundPosition: "-98px 0",
     height: 51,
     width: 175,
-    margin: "22px auto 12px"
+    margin: "22px auto 12px",
   },
   cardHeaderSubHeader: {
     textAlign: "center",
     fontWeight: "bold !important",
     lineHeight: 1.2,
     color: "#999",
-    margin: "0 0 20px"
+    margin: "0 0 20px",
   },
   textField: {
-    marginBottom: 6
+    marginBottom: 6,
   },
   button: {
-    margin: "10px 0px 16px 0px"
+    margin: "10px 0px 16px 0px",
   },
   orContainer: {
     margin: "10px 0px",
     display: "grid",
     gridTemplateColumns: "1fr auto 1fr",
     gridGap: 18,
-    placeItems: "center"
+    placeItems: "center",
   },
   orLine: {
     justifySelf: "stretch",
     height: 1,
-    background: "#e6e6e6"
+    background: "#e6e6e6",
   },
   loginCard: {
     maxWidth: 348,
@@ -169,22 +176,22 @@ export const useSignUpPageStyles = makeStyles({
     marginBottom: 10,
     display: "grid",
     alignItems: "center",
-    gridTemplateColumns: "3fr 2fr"
+    gridTemplateColumns: "3fr 2fr",
   },
   loginButton: {
-    justifySelf: "start"
-  }
+    justifySelf: "start",
+  },
 });
 
 // Navbar Component /components/shared/Navbar.js
-export const useNavbarStyles = makeStyles(theme => ({
+export const useNavbarStyles = makeStyles((theme) => ({
   appBar: {
     background: "#ffffff !important",
     color: "#000000",
     display: "flex",
     alignItems: "center",
     order: 0,
-    zIndex: "100 !important"
+    zIndex: "100 !important",
   },
   section: {
     alignItems: "center",
@@ -193,24 +200,24 @@ export const useNavbarStyles = makeStyles(theme => ({
     maxWidth: 975,
     width: "100%",
     justifyContent: "center",
-    padding: "0px 20px"
+    padding: "0px 20px",
   },
   logoContainer: {
     display: "flex",
     flex: "1 9999 0%",
-    minWidth: 40
+    minWidth: 40,
   },
   logoWrapper: {
     flex: "0 0 auto",
     justifyContent: "flex-start",
     alignItems: "center",
-    alignContent: "stretch"
+    alignContent: "stretch",
   },
   logo: {
     marginTop: 7,
     maxHeight: "100%",
     maxWidth: "100%",
-    objectFit: "contain"
+    objectFit: "contain",
   },
   input: {
     height: 28,
@@ -221,7 +228,7 @@ export const useNavbarStyles = makeStyles(theme => ({
     color: "rgba(var(--i1d,38,38,38),1)",
     outline: 0,
     padding: "3px 3px 3px 26px",
-    zIndex: 2
+    zIndex: 2,
   },
   linksContainer: {
     alignContent: "center",
@@ -229,40 +236,40 @@ export const useNavbarStyles = makeStyles(theme => ({
     display: "flex",
     flex: "1 0 0%",
     flexWrap: "wrap",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   linksWrapper: {
     display: "flex",
     paddingLeft: 24,
     [theme.breakpoints.down("xs")]: {
-      paddingLeft: 0
+      paddingLeft: 0,
     },
     alignItems: "center",
     whiteSpace: "nowrap",
     "&>*:not(:last-child)": {
-      marginRight: 22
-    }
+      marginRight: 22,
+    },
   },
   resultContainer: { width: 215 },
   resultWrapper: {
     display: "flex",
     alignItems: "center",
     height: "50px",
-    padding: "8px 16px"
+    padding: "8px 16px",
   },
   avatarWrapper: {
-    margin: "0 10px 0 0"
+    margin: "0 10px 0 0",
   },
   nameWrapper: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   icon: {
     position: "relative",
     "&:not(:first-child)": {
-      marginLeft: 22
-    }
+      marginLeft: 22,
+    },
   },
   clearIcon: {
     backgroundImage: `url(${IconSheet})`,
@@ -270,7 +277,7 @@ export const useNavbarStyles = makeStyles(theme => ({
     backgroundPosition: "-250px -98px",
     height: 20,
     width: 20,
-    cursor: "pointer"
+    cursor: "pointer",
   },
   searchIcon: {
     backgroundImage: `url(${IconSheet})`,
@@ -281,7 +288,7 @@ export const useNavbarStyles = makeStyles(theme => ({
     left: 11,
     position: "absolute",
     top: 9,
-    zIndex: 2
+    zIndex: 2,
   },
   notifications: {
     position: "relative",
@@ -295,8 +302,8 @@ export const useNavbarStyles = makeStyles(theme => ({
       background: "#ed4956",
       transition: "bottom .2s ease-in-out",
       borderRadius: 2,
-      content: '""'
-    }
+      content: '""',
+    },
   },
   profileActive: {
     border: "1px solid rgba(var(--i1d,38,38,38),1)",
@@ -305,12 +312,12 @@ export const useNavbarStyles = makeStyles(theme => ({
     marginLeft: "-3px",
     marginTop: "-3px",
     position: "absolute",
-    width: "28px !important"
+    width: "28px !important",
   },
   profileImage: {
     width: "22px !important",
     height: "22px !important",
-    marginBottom: "5px !important"
+    marginBottom: "5px !important",
   },
   followers: {
     backgroundImage: `url(${IconSheet})`,
@@ -319,7 +326,7 @@ export const useNavbarStyles = makeStyles(theme => ({
     height: 16,
     width: 16,
     margin: "0 5px",
-    display: "block"
+    display: "block",
   },
   likes: {
     backgroundImage: `url(${IconSheet})`,
@@ -328,26 +335,26 @@ export const useNavbarStyles = makeStyles(theme => ({
     height: 18,
     width: 18,
     margin: "0 5px",
-    display: "block"
+    display: "block",
   },
   tooltipContainer: {
     display: "flex",
     alignItems: "center",
     "& div": {
-      margin: "0 5px"
-    }
+      margin: "0 5px",
+    },
   },
   tooltip: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   resultLink: {
     background: "#fafafa",
     width: "100%",
     borderBottom: "solid 1px rgba(var(--b38,219,219,219),1)",
     "&:hover": {
-      background: "rgba(var(--b3f,250,250,250),1)"
-    }
+      background: "rgba(var(--b3f,250,250,250),1)",
+    },
   },
   progressBar: {
     top: 0,
@@ -360,13 +367,13 @@ export const useNavbarStyles = makeStyles(theme => ({
     animation:
       "2s linear infinite $LoadingBarProgress,.5s ease-out $LoadingBarEnter",
     transformOrigin: "left",
-    width: "100%"
+    width: "100%",
   },
   progressContainer: {
     position: "absolute",
     zIndex: 2000,
     width: "100%",
-    pointerEvents: "none"
+    pointerEvents: "none",
   },
   progressBackground: {
     boxShadow: "0 0 10px #29d, 0 0 5px #29d",
@@ -376,61 +383,61 @@ export const useNavbarStyles = makeStyles(theme => ({
     position: "absolute",
     right: 0,
     transform: "rotate(3deg) translate(0px, -4px)",
-    width: 100
+    width: 100,
   },
   "@keyframes LoadingBarProgress": {
     "0%": {
-      backgroundPosition: "0% 0"
+      backgroundPosition: "0% 0",
     },
     to: {
-      backgroundPosition: "125% 0"
-    }
+      backgroundPosition: "125% 0",
+    },
   },
   "@keyframes LoadingBarEnter": {
     "0%": {
-      transform: "scaleX(0)"
+      transform: "scaleX(0)",
     },
     to: {
-      transform: "scaleX(1)"
-    }
-  }
+      transform: "scaleX(1)",
+    },
+  },
 }));
 
 export const RedTooltip = withStyles({
   popper: {
-    zIndex: "1100 !important"
+    zIndex: "1100 !important",
   },
   arrow: {
-    color: "#ed4956"
+    color: "#ed4956",
   },
   tooltip: {
     backgroundColor: "#ed4956",
-    color: "#fff"
-  }
+    color: "#fff",
+  },
 })(Tooltip);
 
 export const WhiteTooltip = withStyles({
   arrow: {
     color: "#fff",
-    filter: "drop-shadow(1px 0px 2px #ccc)"
+    filter: "drop-shadow(1px 0px 2px #ccc)",
   },
   tooltip: {
     backgroundColor: "#fff",
     color: "#000",
     padding: 0,
     pointerEvents: "all",
-    boxShadow: "0 0 5px 1px rgba(var(--jb7,0,0,0),.0975)"
-  }
+    boxShadow: "0 0 5px 1px rgba(var(--jb7,0,0,0),.0975)",
+  },
 })(Tooltip);
 
 /* Layout component: /components/shared/Layout.js */
-export const useLayoutStyles = makeStyles(theme => ({
+export const useLayoutStyles = makeStyles((theme) => ({
   section: {
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
     minHeight: "100%",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   main: {
     display: "flex",
@@ -439,22 +446,22 @@ export const useLayoutStyles = makeStyles(theme => ({
     flexShrink: 0,
     position: "relative",
     padding: 0,
-    order: 4
+    order: 4,
   },
   childrenWrapper: {
     paddingTop: 30,
     display: "flex",
     margin: "0 auto",
     flexFlow: "row nowrap",
-    maxWidth: "935px !important"
+    maxWidth: "935px !important",
   },
   children: {
-    width: "100%"
-  }
+    width: "100%",
+  },
 }));
 
 /* PostModal component: /components/post/PostModal.js */
-export const usePostModalStyles = makeStyles(theme => ({
+export const usePostModalStyles = makeStyles((theme) => ({
   overlay: {
     position: "fixed !important",
     top: 0,
@@ -464,7 +471,7 @@ export const usePostModalStyles = makeStyles(theme => ({
     backgroundColor: "rgba(0, 0, 0, 0.5) !important",
     zIndex: "1200 !important",
     padding: "0 40px !important",
-    pointerEvents: "auto"
+    pointerEvents: "auto",
   },
   close: {
     padding: 12,
@@ -472,8 +479,8 @@ export const usePostModalStyles = makeStyles(theme => ({
     right: 0,
     position: "fixed",
     zIndex: 1201,
-    cursor: "pointer"
-  }
+    cursor: "pointer",
+  },
 }));
 
 /* FollowButton component: /components/shared/FollowButton.js */
@@ -482,20 +489,20 @@ export const useFollowButtonStyles = makeStyles({
     height: "30px !important",
     width: "75px !important",
     padding: "0px 16px !important",
-    marginTop: ({ side }) => `${side ? "0px !important" : "10px !important"}`
-  }
+    marginTop: ({ side }) => `${side ? "0px !important" : "10px !important"}`,
+  },
 });
 
 /* FeedPost component: /components/feed/FeedPost.js */
-export const useFeedPostStyles = makeStyles(theme => ({
+export const useFeedPostStyles = makeStyles((theme) => ({
   article: {
     border: "1px solid #e6e6e6",
     background: "#ffffff",
     marginBottom: 60,
     [theme.breakpoints.down("xs")]: {
       border: "unset",
-      marginBottom: 0
-    }
+      marginBottom: 0,
+    },
   },
   postHeader: {
     borderBottom: "1px solid rgba(var(--ce3,239,239,239),1)",
@@ -504,137 +511,137 @@ export const useFeedPostStyles = makeStyles(theme => ({
     gridTemplateColumns: "auto minmax(auto, 20px)",
     gridGap: 10,
     alignItems: "center",
-    padding: 16
+    padding: 16,
   },
   moreIcon: {
     height: 24,
     width: 18,
     justifySelf: "center",
     "&:hover": {
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   image: {
-    width: "100%"
+    width: "100%",
   },
   postButtons: {
     display: "grid",
     gridAutoFlow: "column",
     gridTemplateColumns: "24px 24px 24px minmax(24px, auto)",
     gridGap: 16,
-    padding: "6px 0px !important"
+    padding: "6px 0px !important",
   },
   postButtonsWrapper: {
-    padding: "0px 16px 8px !important"
+    padding: "0px 16px 8px !important",
   },
   commentUsername: {
-    fontWeight: "600 !important"
+    fontWeight: "600 !important",
   },
   datePosted: {
-    fontSize: "10px !important"
+    fontSize: "10px !important",
   },
   likes: {
     fontWeight: "600 !important",
     "&:hover": {
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   like: {
     animation: "$like-button-animation 0.45s",
     animationTimingFunction: "ease-in-out",
-    transform: "scale(1)"
+    transform: "scale(1)",
   },
   liked: {
     animation: "$liked-button-animation 0.45s",
     animationTimingFunction: "ease-in-out",
-    transform: "scale(1)"
+    transform: "scale(1)",
   },
   "@keyframes like-button-animation": {
     "0%": { transform: "scale(1)" },
     "25%": { transform: "scale(1.2)" },
     "50%": { transform: "scale(0.95)" },
-    "100%": { transform: "scale(1)" }
+    "100%": { transform: "scale(1)" },
   },
   "@keyframes liked-button-animation": {
     "0%": { transform: "scale(1)" },
     "25%": { transform: "scale(1.2)" },
     "50%": { transform: "scale(0.95)" },
-    "100%": { transform: "scale(1)" }
+    "100%": { transform: "scale(1)" },
   },
   textField: {
-    padding: "10px 0px !important"
+    padding: "10px 0px !important",
   },
   root: {
-    fontSize: "14px !important"
+    fontSize: "14px !important",
   },
   underline: {
     "&::before": {
-      border: "none !important"
+      border: "none !important",
     },
     "&::after": {
-      border: "none !important"
+      border: "none !important",
     },
     "&:hover&:before": {
-      border: "none !important"
-    }
+      border: "none !important",
+    },
   },
   commentContainer: {
     display: "grid",
     gridAutoFlow: "column",
     gridTemplateColumns: "auto minmax(auto, 56px)",
-    padding: "0px 0px 0px 16px !important"
+    padding: "0px 0px 0px 16px !important",
   },
   commentButton: {
     width: "48px !important",
-    padding: "unset"
+    padding: "unset",
   },
   moreButton: {
     color: "#999 !important",
     padding: "0px !important",
     "&:hover": {
-      background: "transparent !important"
-    }
+      background: "transparent !important",
+    },
   },
   saveIcon: {
-    justifySelf: "right"
+    justifySelf: "right",
   },
   commentsLink: {
     color: "#999",
-    margin: "5px 0 !important"
+    margin: "5px 0 !important",
   },
   collapsed: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   expanded: {
-    display: "block"
+    display: "block",
   },
   caption: {
     fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", Helvetica, Arial, sans-serif`,
-    fontSize: "14px !important"
+    fontSize: "14px !important",
   },
   captionWrapper: {
     display: "flex",
     alignItems: "center",
-    wordBreak: "break-all"
+    wordBreak: "break-all",
   },
   username: {
     fontWeight: "600 !important",
-    marginRight: "5px !important"
-  }
+    marginRight: "5px !important",
+  },
 }));
 
-export const usePostStyles = makeStyles(theme => ({
+export const usePostStyles = makeStyles((theme) => ({
   moreIcon: {
     height: 24,
     width: 18,
     justifySelf: "center",
     "&:hover": {
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   image: {
-    width: "100%"
+    width: "100%",
   },
   postButtons: {
     display: "grid",
@@ -642,96 +649,96 @@ export const usePostStyles = makeStyles(theme => ({
     gridTemplateColumns: "24px 24px 24px minmax(24px, auto)",
     gridGap: 16,
     order: 2,
-    padding: "6px 16px 0 !important"
+    padding: "6px 16px 0 !important",
   },
   container: {
-    padding: "0px 16px 8px !important"
+    padding: "0px 16px 8px !important",
   },
   username: {
     fontWeight: "600 !important",
-    marginRight: "5px !important"
+    marginRight: "5px !important",
   },
   datePosted: {
     fontSize: "10px !important",
     order: 4,
-    padding: "6px 16px !important"
+    padding: "6px 16px !important",
   },
   comment: {
-    order: 5
+    order: 5,
   },
   likes: {
     fontWeight: "600 !important",
     order: 3,
     padding: "0 16px !important",
     "&:hover": {
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   like: {
     animation: "$like-button-animation 0.45s",
     animationTimingFunction: "ease-in-out",
-    transform: "scale(1)"
+    transform: "scale(1)",
   },
   liked: {
     animation: "$liked-button-animation 0.45s",
     animationTimingFunction: "ease-in-out",
-    transform: "scale(1)"
+    transform: "scale(1)",
   },
   "@keyframes like-button-animation": {
     "0%": { transform: "scale(1)" },
     "25%": { transform: "scale(1.2)" },
     "50%": { transform: "scale(0.95)" },
-    "100%": { transform: "scale(1)" }
+    "100%": { transform: "scale(1)" },
   },
   "@keyframes liked-button-animation": {
     "0%": { transform: "scale(1)" },
     "25%": { transform: "scale(1.2)" },
     "50%": { transform: "scale(0.95)" },
-    "100%": { transform: "scale(1)" }
+    "100%": { transform: "scale(1)" },
   },
   textField: {
-    padding: "10px 0px !important"
+    padding: "10px 0px !important",
   },
   root: {
-    fontSize: "14px !important"
+    fontSize: "14px !important",
   },
   underline: {
     "&::before": {
-      border: "none !important"
+      border: "none !important",
     },
     "&::after": {
-      border: "none !important"
+      border: "none !important",
     },
     "&:hover&:before": {
-      border: "none !important"
-    }
+      border: "none !important",
+    },
   },
   commentContainer: {
     display: "grid",
     gridAutoFlow: "column",
     gridTemplateColumns: "auto minmax(auto, 56px)",
-    padding: "0px 0px 0px 16px !important"
+    padding: "0px 0px 0px 16px !important",
   },
   commentButton: {
     width: "48px !important",
-    padding: "unset !important"
+    padding: "unset !important",
   },
   moreButton: {
     color: "#999 !important",
     padding: "0px !important",
     "&:hover": {
-      background: "transparent !important"
-    }
+      background: "transparent !important",
+    },
   },
   saveIcon: {
-    justifySelf: "right"
+    justifySelf: "right",
   },
   postContainer: {
     background: "#fff",
     width: "100%",
     [theme.breakpoints.only("xs")]: {
-      marginTop: "-35px !important"
-    }
+      marginTop: "-35px !important",
+    },
   },
   article: {
     display: "flex",
@@ -740,7 +747,7 @@ export const usePostStyles = makeStyles(theme => ({
     borderTopRightRadius: "3px",
     position: "relative",
     flexDirection: "column",
-    width: "100%"
+    width: "100%",
   },
   postHeader: {
     borderLeft: "1px solid rgba(var(--ce3,239,239,239),1)",
@@ -756,8 +763,8 @@ export const usePostStyles = makeStyles(theme => ({
     alignItems: "center",
     [theme.breakpoints.only("xs")]: {
       width: "100% !important",
-      position: "relative !important"
-    }
+      position: "relative !important",
+    },
   },
   postImage: {
     display: "flex",
@@ -770,9 +777,9 @@ export const usePostStyles = makeStyles(theme => ({
       "& img": {
         maxHeight: "200px !important",
         maxWidth: "200px !important",
-        objectFit: "contain !important"
-      }
-    }
+        objectFit: "contain !important",
+      },
+    },
   },
   postButtonsWrapper: {
     borderLeft: "1px solid rgba(var(--ce3,239,239,239),1)",
@@ -787,8 +794,8 @@ export const usePostStyles = makeStyles(theme => ({
     [theme.breakpoints.only("xs")]: {
       width: "100% !important",
       position: "relative !important",
-      top: "0px !important"
-    }
+      top: "0px !important",
+    },
   },
   postCaptionContainer: {
     display: "flex",
@@ -798,15 +805,15 @@ export const usePostStyles = makeStyles(theme => ({
     flexGrow: 1,
     overflow: "hidden",
     [theme.breakpoints.only("xs")]: {
-      display: "none !important"
-    }
+      display: "none !important",
+    },
   },
   postCaption: {
     overflowY: "scroll",
     paddingLeft: "24px",
     paddingRight: "24px",
-    paddingTop: "5px"
-  }
+    paddingTop: "5px",
+  },
 }));
 
 /* LoadingScreen component: /components/shared/LoadingScreen.js */
@@ -819,19 +826,19 @@ export const useLoadingScreenStyles = makeStyles({
     zIndex: 9999,
     background: "#fafafa",
     display: "grid",
-    placeItems: "center"
-  }
+    placeItems: "center",
+  },
 });
 
 /* UserCard component: /components/shared/UserCard.js */
 export const useUserCardStyles = makeStyles({
   avatar: {
     width: ({ avatarSize = 44 }) => avatarSize,
-    height: ({ avatarSize = 44 }) => avatarSize
+    height: ({ avatarSize = 44 }) => avatarSize,
   },
   typography: {
     textOverflow: "ellipsis",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   wrapper: {
     display: "grid",
@@ -839,20 +846,20 @@ export const useUserCardStyles = makeStyles({
     gridTemplateColumns: "min-content auto",
     gridGap: 12,
     alignItems: "center",
-    width: "100%"
+    width: "100%",
   },
   nameWrapper: {
     overflow: "hidden",
-    whiteSpace: "nowrap"
-  }
+    whiteSpace: "nowrap",
+  },
 });
 
 /* FollowSuggestions component: /components/shared/FollowSuggestions.js */
 const border = "1px solid #e6e6e6";
 const marginBottom = "20px !important";
-export const useFollowSuggestionsStyles = makeStyles(theme => ({
+export const useFollowSuggestionsStyles = makeStyles((theme) => ({
   container: {
-    maxWidth: "100vw"
+    maxWidth: "100vw",
   },
   slide: {
     padding: "10px 0px 20px 0px !important",
@@ -863,52 +870,52 @@ export const useFollowSuggestionsStyles = makeStyles(theme => ({
       background: "#ffffff",
       border,
       margin: "0px 10px !important",
-      padding: "20px !important"
+      padding: "20px !important",
     },
     "& .slick-next:before, & .slick-prev:before": {
       color: "rgb(38, 38, 38)",
-      fontSize: "24px !important"
-    }
+      fontSize: "24px !important",
+    },
   },
   typography: {
     borderBottom: "none !important",
-    padding: "0px 0px 0px 12px !important"
+    padding: "0px 0px 0px 12px !important",
   },
   skeleton: {
     display: "grid",
     gridAutoFlow: "column",
     marginBottom,
-    gridGap: 16
+    gridGap: 16,
   },
   avatar: {
     width: 54,
-    height: 54
+    height: 54,
   },
   avatarImg: {
-    userSelect: "none"
+    userSelect: "none",
   },
   text: {
     textOverflow: "ellipsis",
     overflow: "hidden",
     whiteSpace: "nowrap",
-    width: "100%"
+    width: "100%",
   },
   card: {
     display: "grid",
     justifyItems: "center",
     width: 138,
     [theme.breakpoints.down("xs")]: {
-      width: 116
-    }
-  }
+      width: 116,
+    },
+  },
 }));
 
 /* Suggestions: /components/feed/FeedSideSuggestions.js */
-export const useFeedSideSuggestionsStyles = makeStyles(theme => ({
+export const useFeedSideSuggestionsStyles = makeStyles((theme) => ({
   article: {
     margin: "12px 0",
     gridTemplateColumns: "minmax(auto, 600px)",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   card: {
     display: "grid",
@@ -916,33 +923,33 @@ export const useFeedSideSuggestionsStyles = makeStyles(theme => ({
     gridTemplateColumns: "minmax(auto, 500px)",
     gridGap: 10,
     alignItems: "center",
-    padding: "8px 16px !important"
+    padding: "8px 16px !important",
   },
   typography: {
     paddingLeft: `16px !important`,
     [theme.breakpoints.down("xs")]: {
-      fontSize: "1rem !important"
-    }
+      fontSize: "1rem !important",
+    },
   },
   paper: {
-    padding: "8px 0 !important"
-  }
+    padding: "8px 0 !important",
+  },
 }));
 
 // OptionsDialog component: /components/shared/OptionsDialog.js
-export const useOptionsDialogStyles = makeStyles(theme => ({
+export const useOptionsDialogStyles = makeStyles((theme) => ({
   dialogScrollPaper: {
     display: "grid !important",
-    gridTemplateColumns: "minmax(auto, 496px) !important"
+    gridTemplateColumns: "minmax(auto, 496px) !important",
   },
   button: {
-    padding: "12px 8px !important"
+    padding: "12px 8px !important",
   },
   redButton: {
     color: `${theme.palette.error.main} !important`,
     padding: "12px 8px !important",
-    fontWeight: "bold !important"
-  }
+    fontWeight: "bold !important",
+  },
 }));
 
 // ProfilePicture component: /components/shared/ProfilePicture.js
@@ -950,7 +957,7 @@ export const useProfilePictureStyles = makeStyles({
   person: {
     color: "#ffffff",
     height: ({ size = 150 }) => size,
-    width: ({ size = 150 }) => size
+    width: ({ size = 150 }) => size,
   },
   wrapper: {
     background: "#DBDBDB",
@@ -961,18 +968,18 @@ export const useProfilePictureStyles = makeStyles({
     position: "relative",
     placeItems: "center",
     "&:hover": {
-      cursor: ({ isOwner }) => (isOwner ? "pointer" : "default")
-    }
+      cursor: ({ isOwner }) => (isOwner ? "pointer" : "default"),
+    },
   },
   section: {
     display: "grid",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   image: {
     height: ({ size = 150 }) => size,
     width: ({ size = 150 }) => size,
-    borderRadius: "50%"
-  }
+    borderRadius: "50%",
+  },
 });
 
 // EditProfilePage: /pages/edit-profile.js
@@ -982,77 +989,77 @@ const sectionItem = {
   gridGap: 30,
   placeItems: "start end",
   marginBottom: 16,
-  gridTemplateColumns: "minmax(auto, 150px) minmax(auto, 340px)"
+  gridTemplateColumns: "minmax(auto, 150px) minmax(auto, 340px)",
 };
 const typography = {
-  fontWeight: "600 !important"
+  fontWeight: "600 !important",
 };
 const justifySelfStart = {
-  justifySelf: "start"
+  justifySelf: "start",
 };
 const form = {
-  display: "grid"
+  display: "grid",
 };
 
-export const useEditProfilePageStyles = makeStyles(theme => ({
+export const useEditProfilePageStyles = makeStyles((theme) => ({
   section: {
     display: "grid",
     gridAutoFlow: "column",
     [theme.breakpoints.down("sm")]: {
-      gridTemplateColumns: "minmax(48px, max-content) 0px auto"
+      gridTemplateColumns: "minmax(48px, max-content) 0px auto",
     },
     [theme.breakpoints.up("sm")]: {
-      gridTemplateColumns: "minmax(220px, max-content) auto"
+      gridTemplateColumns: "minmax(220px, max-content) auto",
     },
-    border: "1px solid #dbdbdb"
+    border: "1px solid #dbdbdb",
   },
   permanentDrawerPaper: {
     borderRight: "1px solid #dbdbdb !important",
     left: "unset !important",
     top: "unset !important",
-    position: "relative !important"
+    position: "relative !important",
   },
   permanentDrawerRoot: {
     height: "100% !important",
     "& div": {
-      zIndex: "unset !important"
-    }
+      zIndex: "unset !important",
+    },
   },
   temporaryDrawer: {
     "& div": {
-      width: "220px !important"
-    }
+      width: "220px !important",
+    },
   },
   listItemSelected: {
     borderLeft: "2px solid black",
     "& span": {
-      fontWeight: "600 !important"
-    }
+      fontWeight: "600 !important",
+    },
   },
   listItemButton: {
     paddingTop: "10px !important",
-    paddingBottom: "10px !important"
+    paddingBottom: "10px !important",
   },
   menuButton: {
     [theme.breakpoints.up("sm")]: {
-      display: "none !important"
+      display: "none !important",
     },
     marginLeft: "unset !important",
     "&:hover": {
-      background: "none !important"
-    }
+      background: "none !important",
+    },
   },
   container: {
     background: "#ffffff",
     display: "grid",
     justifyContent: "start",
-    padding: "30px !important"
+    padding: "30px !important",
   },
   sectionItem: {
     ...sectionItem,
     [theme.breakpoints.down("xs")]: {
-      display: "block"
-    }
+      display: "block",
+    },
   },
   form,
   typography,
@@ -1060,28 +1067,28 @@ export const useEditProfilePageStyles = makeStyles(theme => ({
   sectionItemWrapper: {
     ...sectionItem,
     [theme.breakpoints.down("xs")]: {
-      display: "unset"
-    }
+      display: "unset",
+    },
   },
   textFieldInput: {
-    padding: "10px !important"
+    padding: "10px !important",
   },
   textField: {
-    alignSelf: "center"
+    alignSelf: "center",
   },
   pictureSectionItem: {
     ...sectionItem,
     placeItems: "center end",
     [theme.breakpoints.down("xs")]: {
       gridGap: 20,
-      gridTemplateColumns: "minmax(auto, 38px) minmax(auto, 340px)"
-    }
+      gridTemplateColumns: "minmax(auto, 38px) minmax(auto, 340px)",
+    },
   },
   typographyChangePic: {
     "&:hover": {
-      cursor: "pointer"
-    }
-  }
+      cursor: "pointer",
+    },
+  },
 }));
 
 export const useFeedPostSkeletonStyles = makeStyles({
@@ -1095,14 +1102,14 @@ export const useFeedPostSkeletonStyles = makeStyles({
     border: "1px solid rgba(var(--b6a,219,219,219),1)",
     backgroundColor: "rgba(var(--cdc,255,255,255),1)",
     marginLeft: "-1px",
-    marginRight: "-1px"
+    marginRight: "-1px",
   },
   headerSkeleton: {
     display: "flex",
     flexDirection: "row",
     height: "60px",
     padding: "16px",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatarSkeleton: {
     backgroundColor: "rgba(var(--c90,239,239,239),1)",
@@ -1110,26 +1117,26 @@ export const useFeedPostSkeletonStyles = makeStyles({
     flexGrow: "0",
     height: "30px",
     marginRight: "12px",
-    width: "30px"
+    width: "30px",
   },
   headerTextSkeleton: {
     display: "flex",
     flexDirection: "column",
     flexGrow: "1",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   primaryTextSkeleton: {
     flexGrow: "0",
     height: "10px",
     marginBottom: "4px",
     width: "140px",
-    backgroundColor: "rgba(var(--c90,239,239,239),1)"
+    backgroundColor: "rgba(var(--c90,239,239,239),1)",
   },
   secondaryTextSkeleton: {
     backgroundColor: "rgba(var(--c90,239,239,239),1)",
     flexGrow: "0",
     height: "10px",
-    width: "100px"
+    width: "100px",
   },
   mediaSkeleton: {
     backgroundColor: "rgba(var(--c90,239,239,239),1)",
@@ -1141,13 +1148,13 @@ export const useFeedPostSkeletonStyles = makeStyles({
       display: "block",
       content: '""',
       paddingBottom: "100%",
-      width: "100%"
-    }
-  }
+      width: "100%",
+    },
+  },
 });
 
 // PostSkeleton component: /components/post/PostSkeleton.js
-export const usePostSkeletonStyles = makeStyles(theme => ({
+export const usePostSkeletonStyles = makeStyles((theme) => ({
   container: {
     overflow: "hidden",
     position: "relative",
@@ -1162,8 +1169,8 @@ export const usePostSkeletonStyles = makeStyles(theme => ({
     [theme.breakpoints.only("xs")]: {
       marginTop: "-35px",
       gridTemplateColumns: "100vw",
-      height: "350px"
-    }
+      height: "350px",
+    },
   },
   headerSkeleton: {
     display: "flex",
@@ -1174,8 +1181,8 @@ export const usePostSkeletonStyles = makeStyles(theme => ({
     borderBottom: "1px solid rgb(239,239,239)",
     [theme.breakpoints.only("xs")]: {
       width: "100%",
-      position: "relative"
-    }
+      position: "relative",
+    },
   },
   avatarSkeleton: {
     backgroundColor: "rgba(var(--c90,239,239,239),1)",
@@ -1183,7 +1190,7 @@ export const usePostSkeletonStyles = makeStyles(theme => ({
     flexGrow: "0",
     height: "30px",
     marginRight: "12px",
-    width: "30px"
+    width: "30px",
   },
   headerTextSkeleton: {
     display: "flex",
@@ -1191,24 +1198,24 @@ export const usePostSkeletonStyles = makeStyles(theme => ({
     flexGrow: "1",
     justifyContent: "center",
     height: 72,
-    padding: 16
+    padding: 16,
   },
   primaryTextSkeleton: {
     flexGrow: "0",
     height: "10px",
     marginBottom: "4px",
     width: "140px",
-    backgroundColor: "rgba(var(--c90,239,239,239),1)"
+    backgroundColor: "rgba(var(--c90,239,239,239),1)",
   },
   secondaryTextSkeleton: {
     backgroundColor: "rgba(var(--c90,239,239,239),1)",
     flexGrow: "0",
     height: "10px",
-    width: "100px"
+    width: "100px",
   },
   mediaSkeleton: {
     [theme.breakpoints.only("xs")]: {
-      gridRow: 2
+      gridRow: 2,
     },
     backgroundColor: "rgba(var(--c90,239,239,239),1)",
     backgroundImage:
@@ -1220,12 +1227,12 @@ export const usePostSkeletonStyles = makeStyles(theme => ({
       display: "block",
       content: '""',
       paddingBottom: "100%",
-      width: "100%"
-    }
-  }
+      width: "100%",
+    },
+  },
 }));
 
-export const useNotificationListStyles = makeStyles(theme => ({
+export const useNotificationListStyles = makeStyles((theme) => ({
   listContainer: {
     background: "rgba(var(--cdc,255,255,255),1)",
     borderRadius: "3px",
@@ -1244,14 +1251,14 @@ export const useNotificationListStyles = makeStyles(theme => ({
     width: "500px !important",
     [theme.breakpoints.down("sm")]: {
       width: "100% !important",
-      right: 0
-    }
+      right: 0,
+    },
   },
   listItem: {
     background: "#fafafa",
     borderBottom: "solid 1px rgba(var(--b38,219,219,219),1)",
     "&:hover": {
-      background: "rgba(var(--b3f,250,250,250),1)"
+      background: "rgba(var(--b3f,250,250,250),1)",
     },
     color: "black !important",
     width: "100% !important",
@@ -1261,134 +1268,134 @@ export const useNotificationListStyles = makeStyles(theme => ({
     minHeight: "40px !important",
     padding: "6px 8px 7px",
     position: "relative",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   listItemWrapper: {
     display: "flex",
     alignItems: "center",
     height: "50px",
-    padding: "8px 16px"
+    padding: "8px 16px",
   },
   avatarWrapper: {
-    margin: "0 10px 0 0"
+    margin: "0 10px 0 0",
   },
   nameWrapper: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   typography: {
     textOverflow: "ellipsis",
     overflow: "hidden",
     whiteSpace: "nowrap",
     [theme.breakpoints.down("xs")]: {
-      maxWidth: "140px !important"
-    }
-  }
+      maxWidth: "140px !important",
+    },
+  },
 }));
 
 // Profile page: /pages/profile.js
-export const useProfilePageStyles = makeStyles(theme => {
+export const useProfilePageStyles = makeStyles((theme) => {
   const followingSectionLarge = {
     display: "grid",
     gridAutoFlow: "column",
     gridGap: 40,
     gridTemplateColumns:
-      "minmax(auto, max-content) minmax(auto, max-content) minmax(auto, max-content)"
+      "minmax(auto, max-content) minmax(auto, max-content) minmax(auto, max-content)",
   };
   const followingTextLarge = {
     display: "grid",
     gridGap: 5,
     gridAutoFlow: "column",
-    gridTemplateColumns: "minmax(auto, max-content) minmax(auto, max-content)"
+    gridTemplateColumns: "minmax(auto, max-content) minmax(auto, max-content)",
   };
   return {
     container: {
-      maxWidth: 935
+      maxWidth: 935,
     },
     followingSection: {
       [theme.breakpoints.up("sm")]: {
-        ...followingSectionLarge
+        ...followingSectionLarge,
       },
       [theme.breakpoints.down("xs")]: {
         display: "grid",
         gridAutoFlow: "column",
-        padding: "10px 0"
-      }
+        padding: "10px 0",
+      },
     },
     followingText: {
       [theme.breakpoints.up("sm")]: {
-        ...followingTextLarge
+        ...followingTextLarge,
       },
       [theme.breakpoints.down("xs")]: {
         display: "grid",
         justifyItems: "center",
         "& p": {
-          fontSize: "0.9rem"
-        }
-      }
+          fontSize: "0.9rem",
+        },
+      },
     },
     followingCount: {
-      fontWeight: "600 !important"
+      fontWeight: "600 !important",
     },
     cardLarge: {
       background: "transparent !important",
       border: "unset !important",
       display: "grid",
       gridAutoFlow: "column",
-      gridTemplateColumns: "minmax(auto, 290px) minmax(auto, 645px)"
+      gridTemplateColumns: "minmax(auto, 290px) minmax(auto, 645px)",
     },
     cardContentLarge: {
       display: "grid",
-      gridGap: 20
+      gridGap: 20,
     },
     cardSmall: {
       background: "transparent !important",
       border: "unset !important",
       [theme.breakpoints.down("xs")]: {
-        width: "100vw"
-      }
+        width: "100vw",
+      },
     },
     sectionSmall: {
       display: "grid",
       gridAutoFlow: "column",
       marginBottom: 16,
       gridTemplateColumns: "77px auto",
-      gridGap: 20
+      gridGap: 20,
     },
     typography: {
-      fontWeight: "600 !important"
+      fontWeight: "600 !important",
     },
     section: {
       "& p": {
         [theme.breakpoints.down("xs")]: {
-          fontSize: "0.9rem"
-        }
-      }
+          fontSize: "0.9rem",
+        },
+      },
     },
     usernameSection: {
       display: "grid",
       gridGap: 10,
       gridAutoFlow: "column",
       gridTemplateColumns: "minmax(auto, max-content) minmax(auto, 112px) 30px",
-      alignItems: "center"
+      alignItems: "center",
     },
     username: {
       fontSize: "28px !important",
-      fontWeight: "300 !important"
+      fontWeight: "300 !important",
     },
     button: {
       lineHeight: "unset !important",
-      height: "30px !important"
+      height: "30px !important",
     },
     settings: {
       height: 30,
-      width: 30
+      width: 30,
     },
     settingsWrapper: {
       "&:hover": {
-        cursor: "pointer"
-      }
+        cursor: "pointer",
+      },
     },
     usernameDivSmall: {
       display: "grid",
@@ -1397,76 +1404,76 @@ export const useProfilePageStyles = makeStyles(theme => {
       // gridTemplateColumns: "minmax(auto, max-content) minmax(auto, 112px) 30px",
       alignItems: "center",
       gridTemplateColumns: "minmax(auto, max-content) 30px",
-      gridGap: 10
+      gridGap: 10,
     },
     dialogScrollPaper: {
       display: "grid !important",
-      gridTemplateColumns: "minmax(auto, 480px) !important"
+      gridTemplateColumns: "minmax(auto, 480px) !important",
     },
     dialogPaper: {
-      borderRadius: 12
+      borderRadius: 12,
     },
     dialogTitle: {
-      textAlign: "center"
+      textAlign: "center",
     },
     wrapper: {
       display: "grid",
       justifyContent: "center",
-      padding: "32px 16px 16px"
+      padding: "32px 16px 16px",
     },
     avatar: {
       width: 90,
-      height: 90
+      height: 90,
     },
     unfollowDialogScrollPaper: {
       display: "grid",
-      gridTemplateColumns: "minmax(auto, 496px)"
+      gridTemplateColumns: "minmax(auto, 496px)",
     },
     cancelButton: {
-      padding: "12px 8px !important"
+      padding: "12px 8px !important",
     },
     unfollowButton: {
       color: `${theme.palette.error.main} !important`,
-      padding: "12px 8px !important"
+      padding: "12px 8px !important",
     },
     unfollowDialogText: {
-      padding: "16px 16px 32px !important"
+      padding: "16px 16px 32px !important",
     },
     arrowIcon: {
       backgroundImage: `url(${IconSheet})`,
       backgroundRepeat: "no-repeat",
       backgroundPosition: "-187px -306px",
       height: "6px",
-      width: "9px"
+      width: "9px",
     },
     buttonSmall: {
       width: "30px",
       height: "30px",
-      minWidth: "30px"
+      minWidth: "30px",
     },
     buttonSelected: {
       width: "30px !important",
       height: "30px !important",
       minWidth: "30px !important",
-      opacity: "0.7 !important"
-    }
+      opacity: "0.7 !important",
+    },
   };
 });
 
 const commonIconProps = {
   backgroundImage: `url(${IconSheet2})`,
   backgroundRepeat: "no-repeat",
-  height: 12
+  height: 12,
 };
 
-export const useProfileTabsStyles = makeStyles(theme => {
+export const useProfileTabsStyles = makeStyles((theme) => {
   const postsIconSmallGrey = {
     ...commonIconProps,
     backgroundImage: `url(${IconSheet})`,
     backgroundPosition: "-331px -199px",
     backgroundSize: "355px 344px",
     height: 24,
-    width: 24
+    width: 24,
   };
   const savedIconSmallGrey = {
     ...commonIconProps,
@@ -1474,87 +1481,87 @@ export const useProfileTabsStyles = makeStyles(theme => {
     backgroundPosition: "-50px -320px",
     backgroundSize: "355px 344px",
     height: 24,
-    width: 24
+    width: 24,
   };
   return {
     tabs: {
-      borderBottom: "1px solid rgba(var(--b38,219,219,219),1)"
+      borderBottom: "1px solid rgba(var(--b38,219,219,219),1)",
     },
     section: {
       [theme.breakpoints.up("sm")]: {
-        marginTop: 24
-      }
+        marginTop: 24,
+      },
     },
     tabsIndicator: {
       [theme.breakpoints.down("xs")]: {
-        display: "none"
+        display: "none",
       },
       top: 0,
-      backgroundColor: "#000000 !important"
+      backgroundColor: "#000000 !important",
     },
     tabRoot: {
       margin: "0px 20px",
-      opacity: 0.5
+      opacity: 0.5,
     },
     tabLabelIcon: {
-      minHeight: "unset !important"
+      minHeight: "unset !important",
     },
     tabWrapper: {
-      flexDirection: "row !important"
+      flexDirection: "row !important",
     },
     postsIconLarge: {
       ...commonIconProps,
       backgroundPosition: "-189px -366px",
       backgroundSize: "410px 396px",
-      width: 12
+      width: 12,
     },
     savedIconLarge: {
       ...commonIconProps,
       backgroundSize: "410px 396px",
       backgroundPosition: "-401px 0",
-      width: 10
+      width: 10,
     },
     postsIconSmall: postsIconSmallGrey,
     postsIconSmallBlue: {
       ...postsIconSmallGrey,
-      backgroundPosition: "-331px -174px"
+      backgroundPosition: "-331px -174px",
     },
     savedIconSmall: savedIconSmallGrey,
     savedIconSmallBlue: {
       ...savedIconSmallGrey,
-      backgroundPosition: "0px -320px"
+      backgroundPosition: "0px -320px",
     },
     savedPostsSection: {
       paddingTop: 60,
       display: "grid",
-      justifyContent: "center"
+      justifyContent: "center",
     },
     noContent: {
       display: "grid",
       placeItems: "center",
       gridTemplateColumns: "minmax(auto, 345px)",
       "& *": {
-        marginBottom: 16
-      }
+        marginBottom: 16,
+      },
     },
     savePhotoIcon: {
       ...commonIconProps,
       height: 62,
       width: 62,
       backgroundSize: "410px 396px",
-      backgroundPosition: "-189px -273px"
+      backgroundPosition: "-189px -273px",
     },
     image: {
       width: "100%",
-      userSelect: "none"
+      userSelect: "none",
     },
     imageWrapper: {
-      position: "relative"
+      position: "relative",
     },
     postMeta: {
       [theme.breakpoints.down("xs")]: {
         gridAutoFlow: "row",
-        alignContent: "space-evenly"
+        alignContent: "space-evenly",
       },
       position: "absolute",
       display: "grid",
@@ -1567,9 +1574,9 @@ export const useProfileTabsStyles = makeStyles(theme => {
         background: "rgba(0,0,0,0.6)",
         cursor: "pointer",
         "& > div": {
-          opacity: 1
-        }
-      }
+          opacity: 1,
+        },
+      },
     },
     postMetaItems: {
       color: "#ffffff",
@@ -1577,67 +1584,67 @@ export const useProfileTabsStyles = makeStyles(theme => {
       gridAutoFlow: "column",
       gridGap: 5,
       placeItems: "center",
-      opacity: 0
+      opacity: 0,
     },
     likes: {
       ...commonIconProps,
       backgroundPosition: "-328px -239px",
       backgroundSize: "355px 344px",
       height: 16,
-      width: 16
+      width: 16,
     },
     comments: {
       ...commonIconProps,
       backgroundPosition: "-327px -203px",
       backgroundSize: "355px 344px",
       height: 16,
-      width: 18
+      width: 18,
     },
     profilePostsSection: {
-      paddingTop: 60
+      paddingTop: 60,
     },
     noPicDivAlt: {
       display: "grid",
       placeItems: "center",
       "& div": {
-        marginBottom: 16
-      }
+        marginBottom: 16,
+      },
     },
     uploadPhotoIcon: {
       ...commonIconProps,
       backgroundSize: "410px 396px",
       backgroundPosition: "0px -273px",
       height: 62,
-      width: 62
+      width: 62,
     },
     article: {
       display: "grid",
-      gridTemplateColumns: "minmax(auto, 935px)"
+      gridTemplateColumns: "minmax(auto, 935px)",
     },
     postContainer: {
       [theme.breakpoints.down("sm")]: {
-        gridGap: 2
+        gridGap: 2,
       },
       display: "grid",
       gridTemplateColumns: "repeat(3, 1fr)",
-      gridGap: 20
-    }
+      gridGap: 20,
+    },
   };
 });
 
 // GridPost component: /components/shared/GridPost.js
-export const useGridPostStyles = makeStyles(theme => ({
+export const useGridPostStyles = makeStyles((theme) => ({
   image: {
     width: "100%",
-    userSelect: "none"
+    userSelect: "none",
   },
   gridPostContainer: {
-    position: "relative"
+    position: "relative",
   },
   gridPostOverlay: {
     [theme.breakpoints.down("xs")]: {
       gridAutoFlow: "row",
-      alignContent: "space-evenly"
+      alignContent: "space-evenly",
     },
     position: "absolute",
     display: "grid",
@@ -1650,9 +1657,9 @@ export const useGridPostStyles = makeStyles(theme => ({
       background: "rgba(0,0,0,0.6)",
       cursor: "pointer",
       "& > div": {
-        opacity: 1
-      }
-    }
+        opacity: 1,
+      },
+    },
   },
   gridPostInfo: {
     color: "#ffffff",
@@ -1660,50 +1667,50 @@ export const useGridPostStyles = makeStyles(theme => ({
     gridAutoFlow: "column",
     gridGap: 5,
     placeItems: "center",
-    opacity: 0
+    opacity: 0,
   },
   likes: {
     ...iconProps,
     backgroundPosition: "-328px -239px",
     backgroundSize: "355px 344px",
     height: 16,
-    width: 16
+    width: 16,
   },
   comments: {
     ...iconProps,
     backgroundPosition: "-327px -203px",
     backgroundSize: "355px 344px",
     height: 16,
-    width: 18
-  }
+    width: 18,
+  },
 }));
 
-export const useMorePostsFromUserStyles = makeStyles(theme => ({
+export const useMorePostsFromUserStyles = makeStyles((theme) => ({
   article: {
     display: "grid",
     gridTemplateColumns: "minmax(auto, 935px)",
-    width: "100vw"
+    width: "100vw",
   },
   postContainer: {
     [theme.breakpoints.down("sm")]: {
-      gridGap: 2
+      gridGap: 2,
     },
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)",
-    gridGap: 20
+    gridGap: 20,
   },
   typography: {
     fontWeight: "bold !important",
     marginBottom: `${theme.spacing(2)} !important`,
-    marginLeft: `${theme.spacing(1)} !important`
+    marginLeft: `${theme.spacing(1)} !important`,
   },
   container: {
-    paddingTop: "6vh"
+    paddingTop: "6vh",
   },
   link: {
     color: "#262626",
     "&:hover": {
-      textDecoration: "none"
-    }
-  }
+      textDecoration: "none",
+    },
+  },
 }));
