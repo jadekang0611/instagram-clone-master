@@ -1,71 +1,67 @@
-# Getting Started with Create React App
+# instagram-clone-practice
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### November 30, 2022
 
-## Available Scripts
+- I'm going to build my new portfolio page using this design and structure.
 
-In the project directory, you can run:
+# Structure of Instagram Page
 
-### `npm start`
+## Routes
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+• / (feed page)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[Components]:
 
-### `npm test`
+- FeedPost
+- FeedPostSkeleton
+- FeedSideSuggestions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+• /explore (explore page)
 
-### `npm run build`
+[Components]:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- ExploreSuggestions
+- ExploreGrid
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+• /p/:postId (post page)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[Components]:
 
-### `npm run eject`
+- Post
+- PostSkeleton
+- PostModal
+- MorePostsFromUser
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+• notification (not a route)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[Components]:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- NotificationList
+- NotificationToolTip
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+• /:username (profile page)
 
-## Learn More
+[Components]:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- ProfileTabs
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+• /accounts/edit/ (edit profile page)
 
-### Code Splitting
+• /accounts/login (login page)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+• /accounts/emailsignup (signup page)
 
-### Analyzing the Bundle Size
+• \* (not found page) (for accounts/.../ pages)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Shared Components
 
-### Making a Progressive Web App
+- Navbar
+- FollowSuggestions
+- FollowButton
+- UserCard
+- LoadingScreen
+- OptionsDialog
+- Layout
+- SEO
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# instagram-clone-master
+# instargram-practice-master
