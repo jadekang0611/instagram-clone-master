@@ -77,11 +77,11 @@ export const useNotFoundPageStyles = makeStyles({
 export const useLoginPageStyles = makeStyles({
   signUpCard: {
     maxWidth: 348,
-    padding: "16px 40px",
+    padding: "16px 30px",
     marginBottom: 10,
-    display: "grid",
+    display: "flex",
+    justifyContent: "center",
     alignItems: "center",
-    gridTemplateColumns: "2fr 1fr",
   },
   card: {
     maxWidth: 348,
@@ -101,6 +101,12 @@ export const useLoginPageStyles = makeStyles({
     width: 175,
     margin: "22px auto 12px",
   },
+  link: {
+    textDecoration: "none",
+    color: "#0095F6",
+    fontWeight: 600,
+    marginLeft: 4,
+  },
   textField: {
     marginBottom: 6,
   },
@@ -117,10 +123,22 @@ export const useLoginPageStyles = makeStyles({
     gridGap: 18,
     placeItems: "center",
   },
+  smallText: {
+    fontSize: 14,
+  },
+  orText: {
+    fontWeight: 700,
+    fontSize: 16,
+    color: "#8f8f8f",
+  },
   orLine: {
     justifySelf: "stretch",
     height: 1,
-    background: "#e6e6e6",
+    background: "#dbdbdb",
+  },
+  fbButton: {
+    fontSize: 14,
+    fontWeight: 600,
   },
   facebookIcon: {
     height: 16,
@@ -131,6 +149,9 @@ export const useLoginPageStyles = makeStyles({
 
 // SignUp page: /pages/signup.js
 export const useSignUpPageStyles = makeStyles({
+  smallText: {
+    fontSize: 14,
+  },
   card: { maxWidth: 348, padding: "16px 40px", marginBottom: 10 },
   section: {
     display: "grid",
