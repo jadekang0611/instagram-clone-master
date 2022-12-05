@@ -4,20 +4,20 @@ import {
   CardHeader,
   TextField,
   Typography,
-} from "@material-ui/core";
-import React from "react";
-import SEO from "../components/shared/Seo";
-import { useLoginPageStyles } from "../styles";
-import { Link } from "react-router-dom";
-import FacebookIconBlue from "../images/facebook-icon-blue.svg";
-import FacebookIconWhite from "../images/facebook-icon-white.png";
+} from '@material-ui/core';
+import React from 'react';
+import SEO from '../components/shared/Seo';
+import { useLoginPageStyles } from '../styles';
+import { Link } from 'react-router-dom';
+import FacebookIconBlue from '../images/facebook-icon-blue.svg';
+import FacebookIconWhite from '../images/facebook-icon-white.png';
 
 function LoginPage() {
   const classes = useLoginPageStyles();
 
   return (
     <>
-      <SEO title="Login" />
+      <SEO title='Login' />
       <section className={classes.section}>
         <article>
           <Card className={classes.card}>
@@ -25,26 +25,27 @@ function LoginPage() {
             <form>
               <TextField
                 fullWidth
-                variant="filled"
-                label="Username"
-                margin="dense"
+                variant='filled'
+                label='Username'
+                margin='dense'
                 className={classes.textField}
-                autoComplete="username"
+                autoComplete='username'
               />
               <TextField
                 fullWidth
-                variant="filled"
-                label="Password"
-                margin="dense"
+                variant='filled'
+                label='Password'
+                type='password'
+                margin='dense'
                 className={classes.textField}
-                autoComplete="current-password"
+                autoComplete='current-password'
               />
               <Button
                 className={classes.button}
-                variant="contained"
+                variant='contained'
                 fullWidth
-                color="primary"
-                type="submit"
+                color='primary'
+                type='submit'
               >
                 Log In
               </Button>
@@ -53,8 +54,8 @@ function LoginPage() {
               <div className={classes.orLine} />
               <div>
                 <Typography
-                  variant="body2"
-                  color="textSecondary"
+                  variant='body2'
+                  color='textSecondary'
                   className={classes.orText}
                 >
                   OR
@@ -62,10 +63,14 @@ function LoginPage() {
               </div>
               <div className={classes.orLine} />
             </div>
-            <LoginWithFacebook color="secondary" iconColor="blue" />
-            <Button fullWidth color="secondary">
+            <LoginWithFacebook
+              color='secondary'
+              iconColor='blue'
+              variant='contained'
+            />
+            <Button fullWidth color='secondary'>
               <Typography
-                variant="caption"
+                variant='caption'
                 style={{ fontSize: 12, fontWeight: 500 }}
               >
                 Forgot password?
@@ -73,9 +78,9 @@ function LoginPage() {
             </Button>
           </Card>
           <Card className={classes.signUpCard}>
-            <Typography align="right" className={classes.smallText}>
+            <Typography align='right' className={classes.smallText}>
               Don't have an account?
-              <Link to="/accounts/emailsignup" className={classes.link}>
+              <Link to='/accounts/emailsignup' className={classes.link}>
                 <span>Sign up</span>
               </Link>
             </Typography>
@@ -86,16 +91,21 @@ function LoginPage() {
   );
 }
 
-export function LoginWithFacebook({ color, iconColor }) {
+export function LoginWithFacebook({ color, iconColor, variant }) {
   const classes = useLoginPageStyles();
   const facebookIcon =
-    iconColor === "blue" ? FacebookIconBlue : FacebookIconWhite;
+    iconColor === 'blue' ? FacebookIconBlue : FacebookIconWhite;
 
   return (
-    <Button fullWidth color={color} className={classes.fbButton}>
+    <Button
+      fullWidth
+      color={color}
+      className={classes.fbButton}
+      variant={variant}
+    >
       <img
         src={facebookIcon}
-        alt="facebook icon"
+        alt='facebook icon'
         className={classes.facebookIcon}
       />
       Log In with Facebook
