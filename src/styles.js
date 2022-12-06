@@ -522,6 +522,10 @@ export const useFollowButtonStyles = makeStyles({
 
 /* FeedPost component: /components/feed/FeedPost.js */
 export const useFeedPostStyles = makeStyles((theme) => ({
+  link: {
+    textDecoration: 'none',
+    fontWeight: 600,
+  },
   article: {
     border: '1px solid #e6e6e6',
     background: '#ffffff',
@@ -624,6 +628,7 @@ export const useFeedPostStyles = makeStyles((theme) => ({
   },
   moreButton: {
     color: '#999 !important',
+    cursor: 'pointer',
     padding: '0px !important',
     '&:hover': {
       background: 'transparent !important',
@@ -655,6 +660,7 @@ export const useFeedPostStyles = makeStyles((theme) => ({
   username: {
     fontWeight: '600 !important',
     marginRight: '5px !important',
+    color: 'black',
   },
 }));
 
@@ -859,6 +865,10 @@ export const useLoadingScreenStyles = makeStyles({
 
 /* UserCard component: /components/shared/UserCard.js */
 export const useUserCardStyles = makeStyles({
+  link: {
+    textDecoration: 'none',
+    color: 'black',
+  },
   avatar: {
     width: ({ avatarSize = 44 }) => avatarSize,
     height: ({ avatarSize = 44 }) => avatarSize,
