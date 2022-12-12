@@ -1,6 +1,6 @@
-import { Button } from '@material-ui/core';
-import React from 'react';
-import { useFollowButtonStyles } from '../../styles';
+import { Button } from "@material-ui/core";
+import React from "react";
+import { useFollowButtonStyles } from "../../styles";
 
 function FollowButton({ side }) {
   const classes = useFollowButtonStyles({ side });
@@ -8,8 +8,8 @@ function FollowButton({ side }) {
 
   const followButton = (
     <Button
-      variant={side ? 'text' : 'coontained'}
-      color='primary'
+      variant={side ? "text" : "contained"}
+      color="primary"
       className={classes.button}
       onClick={() => setFollowing(true)}
     >
@@ -19,7 +19,7 @@ function FollowButton({ side }) {
 
   const followingButton = (
     <Button
-      variant={side ? 'text' : 'outlined'}
+      variant={side ? "text" : "outlined"}
       className={classes.button}
       onClick={() => setFollowing(false)}
     >
