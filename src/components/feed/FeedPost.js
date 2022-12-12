@@ -1,6 +1,6 @@
-import React from 'react';
-import { useFeedPostStyles } from '../../styles';
-import UserCard from '../shared/UserCard';
+import React from "react";
+import { useFeedPostStyles } from "../../styles";
+import UserCard from "../shared/UserCard";
 import {
   CommentIcon,
   LikeIcon,
@@ -9,21 +9,23 @@ import {
   SaveIcon,
   ShareIcon,
   UnlikeIcon,
-} from '../../icons';
-import { Link } from 'react-router-dom';
+} from "../../icons";
+import { Link } from "react-router-dom";
 import {
   Button,
   Divider,
   Hidden,
   TextField,
   Typography,
-} from '@material-ui/core';
-import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
+} from "@material-ui/core";
+import HTMLEllipsis from "react-lines-ellipsis/lib/html";
+import FollowSuggestions from "../shared/FollowSuggestions";
 
-function FeedPost({ post }) {
+function FeedPost({ post, index }) {
   const classes = useFeedPostStyles();
   const [showCaption, setCaption] = React.useState(false);
   const { id, media, likes, user, caption, comments } = post;
+  const showFollowSuggestions = index === 1;
 
   return (
     <>
@@ -34,7 +36,7 @@ function FeedPost({ post }) {
           <MoreIcon className={classes.MoreIcon} />
         </div>
         <div>
-          <img src={media} alt='Post media' className={classes.image} />
+          <img src={media} alt="Post media" className={classes.image} />
         </div>
         {/* Feed Post Buttons */}
         <div className={classes.postButtonsWrapper}>
@@ -46,14 +48,14 @@ function FeedPost({ post }) {
             <ShareIcon />
             <SaveButton />
           </div>
-          <Typography className={classes.like} variant='subtitle2'>
-            <span>{likes === 1 ? '1 like' : `${likes} likes`}</span>
+          <Typography className={classes.like} variant="subtitle2">
+            <span>{likes === 1 ? "1 like" : `${likes} likes`}</span>
           </Typography>
           <div className={showCaption ? classes.expanded : classes.collapsed}>
             <Link to={`/${user.username}`} className={classes.link}>
               <Typography
-                variant='subtitle2'
-                component='span'
+                variant="subtitle2"
+                component="span"
                 className={classes.username}
               >
                 {user.username}
@@ -61,8 +63,8 @@ function FeedPost({ post }) {
             </Link>
             {showCaption ? (
               <Typography
-                variant='body2'
-                component='span'
+                variant="body2"
+                component="span"
                 dangerouslySetInnerHTML={{ __html: caption }}
               />
             ) : (
@@ -70,9 +72,9 @@ function FeedPost({ post }) {
                 <HTMLEllipsis
                   unsafeHTML={caption}
                   className={classes.caption}
-                  maxLine='0'
-                  ellipsis='...'
-                  basedOn='letters'
+                  maxLine="0"
+                  ellipsis="..."
+                  basedOn="letters"
                 />
                 <Button
                   className={classes.moreButton}
@@ -86,8 +88,8 @@ function FeedPost({ post }) {
           <Link to={`/p/${id}`} className={classes.link}>
             <Typography
               className={classes.commentsLink}
-              variant='body2'
-              component='div'
+              variant="body2"
+              component="div"
             >
               View all {comments.length}
             </Typography>
@@ -97,18 +99,18 @@ function FeedPost({ post }) {
               <Link to={`/${comment.user.username}`} className={classes.link}>
                 <Typography
                   className={classes.commentUsername}
-                  variant='subtitle2'
-                  component='span'
+                  variant="subtitle2"
+                  component="span"
                 >
                   {comment.user.username}
                 </Typography>
-                <Typography variant='body2' component='span'>
+                <Typography variant="body2" component="span">
                   {comment.content}
                 </Typography>
               </Link>
             </div>
           ))}
-          <Typography color='textSecondary' className={classes.datePosted}>
+          <Typography color="textSecondary" className={classes.datePosted}>
             5 DAYS AGO
           </Typography>
         </div>
@@ -117,6 +119,7 @@ function FeedPost({ post }) {
           <Comment />
         </Hidden>
       </article>
+      {showFollowSuggestions && <FollowSuggestions />}
     </>
   );
 }
@@ -156,13 +159,13 @@ function SaveButton() {
 
 function Comment() {
   const classes = useFeedPostStyles();
-  const [content, setContent] = React.useState('');
+  const [content, setContent] = React.useState("");
   return (
     <div className={classes.commentContainer}>
       <TextField
         fullWidth
         value={content}
-        placeholder='Add a commenet...'
+        placeholder="Add a commenet..."
         multiline
         maxRows={2}
         minRows={1}
@@ -173,7 +176,7 @@ function Comment() {
         }}
       />
       <Button
-        color='primary'
+        color="primary"
         className={classes.commentButton}
         disabled={!content.trim()}
       >
