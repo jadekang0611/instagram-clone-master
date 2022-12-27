@@ -1,20 +1,22 @@
-import { Typography } from "@material-ui/core";
-import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { LoadingLargeIcon } from "../../icons";
-import { useFollowSuggestionsStyles } from "../../styles";
-import { getDefaultUser } from "../../data";
+import { Avatar, Typography } from '@material-ui/core';
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { LoadingLargeIcon } from '../../icons';
+import { useFollowSuggestionsStyles } from '../../styles';
+import { getDefaultUser } from '../../data';
+import { Link } from 'react-router-dom';
+import FollowButton from './FollowButton';
 
 function FollowSuggestions() {
   const classes = useFollowSuggestionsStyles();
-  let loading = true;
+  let loading = false;
   return (
     <div className={classes.container}>
       <Typography
-        color="textSecondary"
-        variant="subtitle2"
+        color='textSecondary'
+        variant='subtitle2'
         className={classes.typography}
       >
         Suggestions For You
@@ -32,10 +34,10 @@ function FollowSuggestions() {
           swipeToSlide
           arrows
           slidesToScroll={3}
-          easing="ease-in-out"
+          easing='ease-in-out'
         >
           {Array.from({ length: 10 }, () => getDefaultUser()).map((user) => (
-            <FollowSuggestionsItem item={user} />
+            <FollowSuggestionsItem key={user.id} user={user} />
           ))}
         </Slider>
       )}
@@ -43,8 +45,45 @@ function FollowSuggestions() {
   );
 }
 
-function FollowSuggestionsItem() {
-  return <div></div>;
+function FollowSuggestionsItem({ user }) {
+  console.log(user);
+  const classes = useFollowSuggestionsStyles();
+  const { profile_image, username, name } = user;
+
+  return (
+    <div>
+      <div className={classes.card}>
+        <Link to={`/${username}`}>
+          <Avatar
+            src={profile_image}
+            alt={`${username}'s profile`}
+            className={{
+              root: classes.avatar,
+              img: classes.avatarImg,
+            }}
+          />
+        </Link>
+        <Link to={`/${username}`}>
+          <Typography
+            className={classes.text}
+            align='center'
+            variant='subtitle2'
+          >
+            {username}
+          </Typography>
+        </Link>
+        <Typography
+          color='textSecondary'
+          variant='body2'
+          className={classes.text}
+          align='center'
+        >
+          {name}
+        </Typography>
+        <FollowButton side={false} />
+      </div>
+    </div>
+  );
 }
 
 export default FollowSuggestions;
