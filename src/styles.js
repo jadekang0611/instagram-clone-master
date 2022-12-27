@@ -895,6 +895,10 @@ export const useUserCardStyles = makeStyles({
 const border = '1px solid #e6e6e6';
 const marginBottom = '20px !important';
 export const useFollowSuggestionsStyles = makeStyles((theme) => ({
+  link: {
+    textDecoration: 'none',
+    color: '#262626',
+  },
   container: {
     maxWidth: '100vw',
   },

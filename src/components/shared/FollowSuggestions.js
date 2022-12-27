@@ -48,7 +48,6 @@ function FollowSuggestions({ hideHeader }) {
 }
 
 function FollowSuggestionsItem({ user }) {
-  console.log(user);
   const classes = useFollowSuggestionsStyles();
   const { profile_image, username, name } = user;
 
@@ -65,7 +64,7 @@ function FollowSuggestionsItem({ user }) {
             }}
           />
         </Link>
-        <Link to={`/${username}`}>
+        <Link to={`/${username}`} className={classes.link}>
           <Typography
             className={classes.text}
             align='center'

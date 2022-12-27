@@ -56,7 +56,7 @@ function FeedPost({ post, index }) {
             <ShareIcon />
             <SaveButton />
           </div>
-          <Typography className={classes.like} variant='subtitle2'>
+          <Typography className={classes.likes} variant='subtitle2'>
             <span>{likes === 1 ? '1 like' : `${likes} likes`}</span>
           </Typography>
           <div className={showCaption ? classes.expanded : classes.collapsed}>
