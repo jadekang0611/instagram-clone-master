@@ -11,6 +11,7 @@ import {
   UnlikeIcon,
 } from '../../icons';
 import { Link } from 'react-router-dom';
+import PostSkeleton from './PostSkeleton';
 import {
   Button,
   Divider,
@@ -23,8 +24,13 @@ import { defaultPost } from '../../data';
 
 function Post() {
   const classes = usePostStyles();
+  const [loading, setLoading] = React.useState(true);
   const [showOptionsDialog, setShowOptionsDialog] = React.useState(false);
   const { id, media, likes, user, caption, comments } = defaultPost;
+
+  setTimeout(() => setLoading(false), 2000);
+
+  if (loading) return <PostSkeleton />;
 
   return (
     <div className={classes.postContainer}>
