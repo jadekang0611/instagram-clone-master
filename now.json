@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "instagram-v2",
   "alias": "instagram-clone-app",
   "builds": [
     {
