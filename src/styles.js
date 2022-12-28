@@ -1106,6 +1106,11 @@ export const useEditProfilePageStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
+  helperText: {
+    fontSize: '11px',
+    color: '#a0a0a0',
+    fontWeight: '500',
+  },
   form,
   typography,
   justifySelfStart,
@@ -1114,6 +1119,7 @@ export const useEditProfilePageStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       display: 'unset',
     },
+    alignItems: 'center !important',
   },
   textFieldInput: {
     padding: '10px !important',
@@ -1133,6 +1139,10 @@ export const useEditProfilePageStyles = makeStyles((theme) => ({
     '&:hover': {
       cursor: 'pointer',
     },
+  },
+  bio: {
+    fontSize: '16px',
+    fontWeight: '600',
   },
 }));
 
