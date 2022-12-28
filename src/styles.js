@@ -1510,6 +1510,9 @@ export const useProfilePageStyles = makeStyles((theme) => {
       minWidth: '30px !important',
       opacity: '0.7 !important',
     },
+    link: {
+      textDecoration: 'none',
+    },
   };
 });
 
