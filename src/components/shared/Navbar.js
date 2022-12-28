@@ -7,12 +7,12 @@ import {
   Grid,
   Fade,
   Zoom,
-} from "@material-ui/core";
-import NotificationTooltip from "../notification/NotificationTooltip";
-import React from "react";
-import { useNavbarStyles, WhiteTooltip, RedTooltip } from "../../styles";
-import logo from "../../images/logo.png";
-import { Link, useHistory } from "react-router-dom";
+} from '@material-ui/core';
+import NotificationTooltip from '../notification/NotificationTooltip';
+import React from 'react';
+import { useNavbarStyles, WhiteTooltip, RedTooltip } from '../../styles';
+import logo from '../../images/logo.svg';
+import { Link, useHistory } from 'react-router-dom';
 import {
   LoadingIcon,
   AddIcon,
@@ -22,10 +22,10 @@ import {
   ExploreIcon,
   HomeActiveIcon,
   HomeIcon,
-} from "../../icons";
-import { defaultCurrentUser, getDefaultUser } from "../../data";
-import NotificationList from "../notification/NotificationList";
-import { useNProgress } from "@tanem/react-nprogress";
+} from '../../icons';
+import { defaultCurrentUser, getDefaultUser } from '../../data';
+import NotificationList from '../notification/NotificationList';
+import { useNProgress } from '@tanem/react-nprogress';
 
 function Navbar({ minimalNavbar }) {
   const classes = useNavbarStyles();
@@ -60,9 +60,14 @@ function Logo() {
 
   return (
     <div className={classes.logoContainer}>
-      <Link to="/">
+      <Link to='/'>
         <div className={classes.logoWrapper}>
-          <img src={logo} alt="instagram-logo" className={classes.logo} />
+          <img
+            height={105}
+            src={logo}
+            alt='instagram-logo'
+            className={classes.logo}
+          />
         </div>
       </Link>
     </div>
@@ -73,7 +78,7 @@ function Search({ history }) {
   const classes = useNavbarStyles();
   const [loading, setLoading] = React.useState(false);
   const [results, setResults] = React.useState([]);
-  const [query, setQuery] = React.useState("");
+  const [query, setQuery] = React.useState('');
 
   const hasResults = Boolean(query) && results.length > 0;
 
@@ -83,7 +88,7 @@ function Search({ history }) {
   }, [query]);
 
   function handleClearInput() {
-    setQuery("");
+    setQuery('');
   }
 
   return (
@@ -109,11 +114,11 @@ function Search({ history }) {
                 >
                   <div className={classes.resultWrapper}>
                     <div className={classes.avatarWrapper}>
-                      <Avatar src={result.profile_image} alt="user avatar" />
+                      <Avatar src={result.profile_image} alt='user avatar' />
                     </div>
                     <div className={classes.nameWrapper}>
-                      <Typography variant="body1">{result.username}</Typography>
-                      <Typography variant="body2" color="textSecondary">
+                      <Typography variant='body1'>{result.username}</Typography>
+                      <Typography variant='body2' color='textSecondary'>
                         {result.name}
                       </Typography>
                     </div>
@@ -135,7 +140,7 @@ function Search({ history }) {
               <span className={classes.clearIcon} onClick={handleClearInput} />
             )
           }
-          placeholder="Search"
+          placeholder='Search'
           value={query}
         />
       </WhiteTooltip>
@@ -173,9 +178,9 @@ function Links({ path }) {
         <Hidden xsDown>
           <AddIcon />
         </Hidden>
-        <Link to="/">{path === "/" ? <HomeActiveIcon /> : <HomeIcon />}</Link>
-        <Link to="/explore">
-          {path === "/explore" ? <ExploreActiveIcon /> : <ExploreIcon />}
+        <Link to='/'>{path === '/' ? <HomeActiveIcon /> : <HomeIcon />}</Link>
+        <Link to='/explore'>
+          {path === '/explore' ? <ExploreActiveIcon /> : <ExploreIcon />}
         </Link>
         <RedTooltip
           arrow
@@ -193,7 +198,7 @@ function Links({ path }) {
             className={
               path === `/${defaultCurrentUser.username}`
                 ? classes.profileActive
-                : ""
+                : ''
             }
           ></div>
           <Avatar
