@@ -71,3 +71,5 @@
 - https://hasura.io/blog/authentication-and-authorization-using-hasura-and-firebase/
 
 - https://hasura.io/jwt-config/
+
+- https://hasura.io/docs/latest/databases/connect-db/cloud-databases/gcp/
