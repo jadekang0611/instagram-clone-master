@@ -1,22 +1,48 @@
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import ApolloClient from 'apollo-client';
-import { WebSocketLink } from 'apollo-link-ws';
+import {
+  ApolloClient,
+  InMemoryCache,
+  split,
+  HttpLink,
+  gql,
+} from '@apollo/client';
+import { getMainDefinition } from '@apollo/client/utilities';
+import { createClient } from 'graphql-ws';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 
-const headers = {
-  'x-hasura-admin-secret':
-    'sOz6nXnWQozNUeAhyRE9aqfEy3dnyJdFLtwjYuXmuFShou4yIzq1vmq7DOMcEfNn',
-};
+const httpLink = new HttpLink({
+  uri: 'https://creative-dane-85.hasura.app/v1/graphql',
+  headers: {
+    'x-hasura-admin-secret':
+      'sOz6nXnWQozNUeAhyRE9aqfEy3dnyJdFLtwjYuXmuFShou4yIzq1vmq7DOMcEfNn',
+  },
+});
 
-const client = new ApolloClient({
-  link: new WebSocketLink({
-    uri: 'wss://creative-dane-85.hasura.app/v1/graphql',
-    options: {
-      reconnect: true,
-      connectionParams: {
-        headers,
+const wsLink = new GraphQLWsLink(
+  createClient({
+    url: 'wss://creative-dane-85.hasura.app/v1/graphql',
+    connectionParams: {
+      headers: {
+        'x-hasura-admin-secret':
+          'sOz6nXnWQozNUeAhyRE9aqfEy3dnyJdFLtwjYuXmuFShou4yIzq1vmq7DOMcEfNn',
       },
     },
-  }),
+  })
+);
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink
+);
+
+const client = new ApolloClient({
+  link: splitLink,
   cache: new InMemoryCache(),
 });
 

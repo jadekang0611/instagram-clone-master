@@ -5,7 +5,7 @@ import client from './graphql/client';
 import theme from './theme';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 import AuthProvider from './auth';
 
 ReactDOM.render(
