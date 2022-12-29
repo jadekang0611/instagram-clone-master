@@ -65,3 +65,9 @@
 - SEO
 
 # instargram-practice-master
+
+# Resources
+
+- https://hasura.io/blog/authentication-and-authorization-using-hasura-and-firebase/
+
+- https://hasura.io/jwt-config/

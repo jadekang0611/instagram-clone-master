@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "alias": "instagram-clone-app",
+  "alias": "instagram-by-jadie",
   "builds": [
     {
       "src": "package.json",
