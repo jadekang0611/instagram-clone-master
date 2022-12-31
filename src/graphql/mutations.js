@@ -35,9 +35,8 @@ export const EDIT_USER = gql`
     $username: String!
     $website: String!
     # $bio: String!
-    $email: String!
-  ) # $phoneNumber: String!
-  {
+    $email: String! # $phoneNumber: String!
+  ) {
     update_users(
       where: { id: { _eq: $id } }
       _set: {
@@ -48,6 +47,17 @@ export const EDIT_USER = gql`
         email: $email
         # phone_number: $phoneNumber
       }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
+export const EDIT_USER_AVATAR = gql`
+  mutation editUser($id: uuid!, $profileImage: String!) {
+    update_users(
+      where: { id: { _eq: $id } }
+      _set: { profile_image: $profileImage }
     ) {
       affected_rows
     }
