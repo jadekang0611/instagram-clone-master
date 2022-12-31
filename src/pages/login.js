@@ -22,7 +22,6 @@ import { AuthError } from './signup';
 function LoginPage() {
   const classes = useLoginPageStyles();
   const {
-    getFieldState,
     register,
     handleSubmit,
     watch,

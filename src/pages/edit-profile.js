@@ -11,16 +11,28 @@ import {
 } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 import React from 'react';
+import { UserContext } from '../App';
 import Layout from '../components/shared/Layout';
 import ProfilePicture from '../components/shared/ProfilePicture';
 import { defaultCurrentUser } from '../data';
+import { useQuery } from '@apollo/client';
+import { GET_EDIT_USER_PROFILE } from '../graphql/queries';
 import { useEditProfilePageStyles } from '../styles';
+import LoadingScreen from '../components/shared/LoadingScreen';
+import { useForm } from 'react-hook-form';
+import isURL from 'validator/lib/isURL';
+import isEmail from 'validator/lib/isEmail';
+import isMobilePhone from 'validator/lib/isMobilePhone';
 
 function EditProfilePage({ history }) {
+  const { me, currentUserId } = React.useContext(UserContext);
+  const variables = { id: currentUserId };
+  const { data, loading } = useQuery(GET_EDIT_USER_PROFILE, { variables });
   const classes = useEditProfilePageStyles();
   const path = history.location.pathname;
-
   const [showDrawer, setDrawer] = React.useState(false);
+
+  if (loading) return <LoadingScreen />;
 
   function handleToggleDrawer() {
     setDrawer((prev) => !prev);
@@ -118,7 +130,7 @@ function EditProfilePage({ history }) {
           </Hidden>
         </nav>
         <main>
-          {path.includes('edit') && <EditUserInfo user={defaultCurrentUser} />}
+          {path.includes('edit') && <EditUserInfo user={data.users_by_pk} />}
         </main>
       </section>
     </Layout>
@@ -127,10 +139,16 @@ function EditProfilePage({ history }) {
 
 function EditUserInfo({ user }) {
   const classes = useEditProfilePageStyles();
+  const { register, handleSubmit } = useForm({ mode: 'onBlur' });
+
+  async function onSubmit(data) {
+    console.log({ data });
+  }
+
   return (
     <section className={classes.container}>
       <div className={classes.pictureSectionItem}>
-        <ProfilePicture size={38} user={user} />
+        <ProfilePicture size={38} image={user.profile_image} />
         <div className={classes.justifySelfStart}>
           <Typography className={classes.typography}>
             {user.username}
@@ -144,8 +162,17 @@ function EditUserInfo({ user }) {
           </Typography>
         </div>
       </div>
-      <form className={classes.form}>
-        <SelectionItem text='Name' formItem={user.name} />
+      <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+        <SelectionItem
+          text='Name'
+          formItem={user.name}
+          name='name'
+          register={register('name', {
+            required: true,
+            minLength: 5,
+            maxLength: 20,
+          })}
+        />
         <div className={classes.sectionItem}>
           <div />
           <Typography
@@ -156,7 +183,17 @@ function EditUserInfo({ user }) {
             Facebook to change your name.
           </Typography>
         </div>
-        <SelectionItem text='Username' formItem={user.username} />
+        <SelectionItem
+          text='Username'
+          formItem={user.username}
+          name='username'
+          register={register('username', {
+            required: true,
+            pattern: /^[a-zA-Z0-9_]*$/,
+            minLength: 5,
+            maxLength: 20,
+          })}
+        />
         <div className={classes.sectionItem}>
           <div />
           <Typography
@@ -167,7 +204,20 @@ function EditUserInfo({ user }) {
             dandy_jadie for another 14 days.
           </Typography>
         </div>
-        <SelectionItem text='Website' formItem={user.website} />
+        <SelectionItem
+          text='Website'
+          formItem={user.website}
+          name='website'
+          register={register('website', {
+            validate: (input) =>
+              Boolean(input)
+                ? isURL(input, {
+                    protocols: ['http', 'https'],
+                    require_protocol: true,
+                  })
+                : true,
+          })}
+        />
         <div className={classes.sectionItem}>
           <div />
           <Typography
@@ -183,12 +233,16 @@ function EditUserInfo({ user }) {
             <Typography className={classes.bio}>Bio</Typography>
           </aside>
           <TextField
+            name='bio'
+            register={register('bio', {
+              maxLength: 120,
+            })}
             variant='outlined'
             multiline
             maxRows={3}
             minRows={3}
             fullWidth
-            value={user.bio}
+            defaultValue={user.bio}
           />
         </div>
         <div className={classes.sectionItem}>
@@ -207,9 +261,23 @@ function EditUserInfo({ user }) {
           </Typography>
         </div>
 
-        <SelectionItem text='Email' formItem={user.email} />
-        <SelectionItem text='Phone number' formItem={user.phone_number} />
-        <SelectionItem text='Gender' formItem={user.gender} />
+        <SelectionItem
+          text='Email'
+          formItem={user.email}
+          name='email'
+          register={register('email', {
+            required: true,
+            validate: (input) => isEmail(input),
+          })}
+        />
+        <SelectionItem
+          text='Phone number'
+          formItem={user.phone_number}
+          name='phone_number'
+          ref={register('phone_number', {
+            validate: (input) => (Boolean(input) ? isMobilePhone(input) : true),
+          })}
+        />
         <div className={classes.sectionItem}>
           <div />
           <Button
@@ -225,8 +293,7 @@ function EditUserInfo({ user }) {
     </section>
   );
 }
-
-function SelectionItem({ type = 'text', text, formItem }) {
+function SelectionItem({ type = 'text', text, formItem, register, name }) {
   const classes = useEditProfilePageStyles();
   return (
     <div className={classes.sectionItemWrapper}>
@@ -241,9 +308,10 @@ function SelectionItem({ type = 'text', text, formItem }) {
         </Hidden>
       </aside>
       <TextField
+        {...register}
         variant='outlined'
         fullWidth
-        value={formItem}
+        defaultValue={formItem}
         type={type}
         className={classes.textField}
         inputProps={{ className: classes.textFieldInput }}

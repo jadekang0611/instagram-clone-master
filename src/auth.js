@@ -5,7 +5,6 @@ import 'firebase/database';
 import defaultUserImage from './images/default-user-image.jpg';
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from './graphql/mutations';
-import { FreeBreakfast } from '@material-ui/icons';
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
