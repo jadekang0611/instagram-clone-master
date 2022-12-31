@@ -6,6 +6,8 @@ import {
   List,
   ListItem,
   ListItemText,
+  Slide,
+  Snackbar,
   TextField,
   Typography,
 } from '@material-ui/core';
@@ -14,8 +16,7 @@ import React from 'react';
 import { UserContext } from '../App';
 import Layout from '../components/shared/Layout';
 import ProfilePicture from '../components/shared/ProfilePicture';
-import { defaultCurrentUser } from '../data';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { GET_EDIT_USER_PROFILE } from '../graphql/queries';
 import { useEditProfilePageStyles } from '../styles';
 import LoadingScreen from '../components/shared/LoadingScreen';
@@ -23,9 +24,11 @@ import { useForm } from 'react-hook-form';
 import isURL from 'validator/lib/isURL';
 import isEmail from 'validator/lib/isEmail';
 import isMobilePhone from 'validator/lib/isMobilePhone';
+import { EDIT_USER } from '../graphql/mutations';
+import { AuthContext } from '../auth';
 
 function EditProfilePage({ history }) {
-  const { me, currentUserId } = React.useContext(UserContext);
+  const { currentUserId } = React.useContext(UserContext);
   const variables = { id: currentUserId };
   const { data, loading } = useQuery(GET_EDIT_USER_PROFILE, { variables });
   const classes = useEditProfilePageStyles();
@@ -137,12 +140,38 @@ function EditProfilePage({ history }) {
   );
 }
 
+const DEFAULT_ERROR = { type: '', message: '' };
+
 function EditUserInfo({ user }) {
   const classes = useEditProfilePageStyles();
   const { register, handleSubmit } = useForm({ mode: 'onBlur' });
+  const { updateEmail } = React.useContext(AuthContext);
+  const [editUser] = useMutation(EDIT_USER);
+  const [error, setError] = React.useState(DEFAULT_ERROR);
+  const [open, setOpen] = React.useState(false);
 
   async function onSubmit(data) {
-    console.log({ data });
+    try {
+      setError(DEFAULT_ERROR);
+      const variables = { ...data, id: user.id };
+      await updateEmail(data.email);
+      await editUser({ variables });
+      setOpen(true);
+    } catch (error) {
+      console.error('Error updating profile', error);
+      handleError(error);
+    }
+  }
+
+  async function handleError(error) {
+    if (error.message.includes('users_username_key')) {
+      setError({
+        type: 'username',
+        message: 'This username is already taken.',
+      });
+    } else if (error.code.includes('auth')) {
+      setError({ type: 'email', message: error.message });
+    }
   }
 
   return (
@@ -185,6 +214,7 @@ function EditUserInfo({ user }) {
         </div>
         <SelectionItem
           text='Username'
+          error={error}
           formItem={user.username}
           name='username'
           register={register('username', {
@@ -235,6 +265,7 @@ function EditUserInfo({ user }) {
           <TextField
             name='bio'
             register={register('bio', {
+              required: false,
               maxLength: 120,
             })}
             variant='outlined'
@@ -263,6 +294,7 @@ function EditUserInfo({ user }) {
 
         <SelectionItem
           text='Email'
+          error={error}
           formItem={user.email}
           name='email'
           register={register('email', {
@@ -275,6 +307,7 @@ function EditUserInfo({ user }) {
           formItem={user.phone_number}
           name='phone_number'
           ref={register('phone_number', {
+            required: false,
             validate: (input) => (Boolean(input) ? isMobilePhone(input) : true),
           })}
         />
@@ -290,10 +323,24 @@ function EditUserInfo({ user }) {
           </Button>
         </div>
       </form>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        TransitionComponent={Slide}
+        message={<span>Profile updated</span>}
+        onClose={() => setOpen(false)}
+      />
     </section>
   );
 }
-function SelectionItem({ type = 'text', text, formItem, register, name }) {
+function SelectionItem({
+  type = 'text',
+  text,
+  formItem,
+  register,
+  error,
+  name,
+}) {
   const classes = useEditProfilePageStyles();
   return (
     <div className={classes.sectionItemWrapper}>
@@ -308,7 +355,9 @@ function SelectionItem({ type = 'text', text, formItem, register, name }) {
         </Hidden>
       </aside>
       <TextField
+        name={name}
         {...register}
+        helperText={error?.type === name && error.message}
         variant='outlined'
         fullWidth
         defaultValue={formItem}

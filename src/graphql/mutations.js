@@ -34,19 +34,19 @@ export const EDIT_USER = gql`
     $name: String!
     $username: String!
     $website: String!
-    $bio: String!
+    # $bio: String!
     $email: String!
-    $phoneNumber: String!
-  ) {
+  ) # $phoneNumber: String!
+  {
     update_users(
       where: { id: { _eq: $id } }
       _set: {
         name: $name
         username: $username
         website: $website
-        bio: $bio
+        # bio: $bio
         email: $email
-        phone_number: $phoneNumber
+        # phone_number: $phoneNumber
       }
     ) {
       affected_rows
