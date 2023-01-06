@@ -26,6 +26,9 @@ import {
 import { defaultCurrentUser, getDefaultUser } from '../../data';
 import NotificationList from '../notification/NotificationList';
 import { useNProgress } from '@tanem/react-nprogress';
+import { useLazyQuery } from '@apollo/client';
+import { SEARCH_USERS } from '../../graphql/queries';
+import { UserContext } from '../../App';
 
 function Navbar({ minimalNavbar }) {
   const classes = useNavbarStyles();
@@ -79,13 +82,22 @@ function Search({ history }) {
   const [loading, setLoading] = React.useState(false);
   const [results, setResults] = React.useState([]);
   const [query, setQuery] = React.useState('');
+  const [searchUsers, { data }] = useLazyQuery(SEARCH_USERS);
 
   const hasResults = Boolean(query) && results.length > 0;
 
   React.useEffect(() => {
     if (!query.trim()) return;
-    setResults(Array.from({ length: 5 }, () => getDefaultUser()));
-  }, [query]);
+    setLoading(true);
+    // useLazyQuery is synchronous doesn't return a promise
+    const variables = { query: `%${query}%` };
+    searchUsers({ variables });
+    if (data) {
+      setResults(data.users);
+      setLoading(false);
+    }
+    // setResults(Array.from({ length: 5 }, () => getDefaultUser()));
+  }, [query, data, searchUsers]);
 
   function handleClearInput() {
     setQuery('');
@@ -149,6 +161,7 @@ function Search({ history }) {
 }
 
 function Links({ path }) {
+  const { me } = React.useContext(UserContext);
   const classes = useNavbarStyles();
   const [showList, setShowList] = React.useState(false);
   const [showTooltip, setShowTooltip] = React.useState(true);
@@ -201,10 +214,7 @@ function Links({ path }) {
                 : ''
             }
           ></div>
-          <Avatar
-            src={defaultCurrentUser.profile_image}
-            className={classes.profileImage}
-          />
+          <Avatar src={me.profile_image} className={classes.profileImage} />
         </Link>
       </div>
     </div>

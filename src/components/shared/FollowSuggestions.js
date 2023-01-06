@@ -55,14 +55,7 @@ function FollowSuggestionsItem({ user }) {
     <div>
       <div className={classes.card}>
         <Link to={`/${username}`}>
-          <Avatar
-            src={profile_image}
-            alt={`${username}'s profile`}
-            className={{
-              root: classes.avatar,
-              img: classes.avatarImg,
-            }}
-          />
+          <Avatar src={profile_image} alt={`${username}'s profile`} />
         </Link>
         <Link to={`/${username}`} className={classes.link}>
           <Typography

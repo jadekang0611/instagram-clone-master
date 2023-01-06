@@ -38,7 +38,8 @@ function SignUpPage() {
     try {
       setError('');
       await signUpWithEmailAndPassword(data);
-      history.push('/');
+      // to ensure user gets redirected properly once signed up
+      setTimeout(() => history.push('/'), 0);
     } catch (error) {
       handleError(error);
     }
@@ -72,7 +73,7 @@ function SignUpPage() {
   );
 
   const validIcon = (
-    <InputAdornment position='end'>
+    <InputAdornment position='start'>
       <CheckCircleOutline style={{ color: '#ccc', height: 30, width: 30 }} />
     </InputAdornment>
   );

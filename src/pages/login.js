@@ -100,7 +100,7 @@ function LoginPage() {
                 })}
                 InputProps={{
                   endAdornment: hasPassword && (
-                    <InputAdornment>
+                    <InputAdornment position='start'>
                       <Button onClick={togglePasswordVisibility}>
                         {showPassword ? 'Hide' : 'Show'}
                       </Button>
@@ -178,7 +178,8 @@ export function LoginWithFacebook({ color, iconColor, variant }) {
   async function handleLogInWithGoogle() {
     try {
       await logInWithGoogle();
-      history.push('/');
+      // to ensure user gets redirected properly once logged in
+      setTimeout(() => history.push('/'), 0);
     } catch (error) {
       console.log('Error logging in with Google', error);
       setError(error.message);
