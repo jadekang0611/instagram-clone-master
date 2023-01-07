@@ -1,25 +1,25 @@
-import {
-  AppBar,
-  Avatar,
-  Button,
-  Dialog,
-  Divider,
-  InputAdornment,
-  Paper,
-  TextField,
-  Toolbar,
-  Typography,
-} from '@material-ui/core';
-import { ArrowBackIos, PinDrop } from '@material-ui/icons';
 import React from 'react';
-// Import the Slate editor factory.
 import { createEditor } from 'slate';
-
-// Import the Slate components and React plugin.
 import { Slate, Editable, withReact } from 'slate-react';
 import { useAddPostDialogStyles } from '../../styles';
+import {
+  Dialog,
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Divider,
+  Paper,
+  Avatar,
+  TextField,
+  InputAdornment,
+} from '@material-ui/core';
+import { ArrowBackIos, PinDrop } from '@material-ui/icons';
 import { UserContext } from '../../App';
 import serialize from '../../utils/serialize';
+import handleImageUpload from '../../utils/handleImageUpload';
+import { useMutation } from '@apollo/client';
+import { CREATE_POST } from '../../graphql/mutations';
 
 const initialValue = [
   {
@@ -30,14 +30,25 @@ const initialValue = [
 
 function AddPostDialog({ media, handleClose }) {
   const classes = useAddPostDialogStyles();
-  const { me } = React.useContext(UserContext);
+  const { me, currentUserId } = React.useContext(UserContext);
   const editor = React.useMemo(() => withReact(createEditor()), []);
   const [value, setValue] = React.useState(initialValue);
   const [location, setLocation] = React.useState('');
   const [submitting, setSubmitting] = React.useState(false);
+  const [createPost] = useMutation(CREATE_POST);
 
-  function handleSharePost() {
+  async function handleSharePost() {
     setSubmitting(true);
+    const url = await handleImageUpload(media);
+    const variables = {
+      userId: currentUserId,
+      location,
+      caption: serialize({ children: value }),
+      media: url,
+    };
+    await createPost({ variables });
+    setSubmitting(false);
+    window.location.reload();
   }
 
   return (
@@ -52,6 +63,7 @@ function AddPostDialog({ media, handleClose }) {
             color='primary'
             className={classes.share}
             disabled={submitting}
+            onClick={handleSharePost}
           >
             Share
           </Button>
@@ -60,10 +72,9 @@ function AddPostDialog({ media, handleClose }) {
       <Divider />
       <Paper className={classes.paper}>
         <Avatar src={me.profile_image} />
-
         <Slate
           editor={editor}
-          value={initialValue}
+          value={value}
           onChange={(value) => setValue(value)}
         >
           <Editable

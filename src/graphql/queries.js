@@ -49,3 +49,16 @@ export const SEARCH_USERS = gql`
     }
   }
 `;
+
+export const GET_POSTS = gql`
+  query getPosts {
+    posts {
+      id
+      media
+      location
+      user_id
+      caption
+      created_at
+    }
+  }
+`;

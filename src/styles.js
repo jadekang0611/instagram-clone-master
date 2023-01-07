@@ -1825,7 +1825,7 @@ export const useAddPostDialogStyles = makeStyles((theme) => ({
     '&::after': {
       border: 'none !important',
     },
-    '&:hover&:before ': {
+    '&:hover&:before': {
       border: 'none !important',
     },
   },
