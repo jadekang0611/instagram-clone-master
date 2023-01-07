@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const CHECK_IF_USERNAME_TAKEN = gql`
   query CheckIfUsernameTaken($username: String!) {
-    users(where: { username: { _eq: $username } }) {
+    instagram_users(where: { username: { _eq: $username } }) {
       username
     }
   }
@@ -10,7 +10,7 @@ export const CHECK_IF_USERNAME_TAKEN = gql`
 
 export const GET_USER_EMAIL = gql`
   query GetUserEmail($input: String!) {
-    users(
+    instagram_users(
       where: {
         _or: [{ username: { _eq: $input } }, { phone_number: { _eq: $input } }]
       }
@@ -22,23 +22,22 @@ export const GET_USER_EMAIL = gql`
 
 export const GET_EDIT_USER_PROFILE = gql`
   query getEditUserProfile($id: uuid!) {
-    users_by_pk(id: $id) {
+    instagram_users_by_pk(id: $id) {
       id
       username
       name
-      phone_number
-      profile_image
-      user_id
-      website
       email
       bio
+      profile_image
+      website
+      phone_number
     }
   }
 `;
 
 export const SEARCH_USERS = gql`
   query searchUsers($query: String) {
-    users(
+    instagram_users(
       where: {
         _or: [{ username: { _ilike: $query } }, { name: { _ilike: $query } }]
       }

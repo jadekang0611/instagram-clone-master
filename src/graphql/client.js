@@ -1,29 +1,21 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  split,
-  HttpLink,
-  gql,
-} from '@apollo/client';
+import { ApolloClient, InMemoryCache, split, HttpLink } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { createClient } from 'graphql-ws';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 
 const httpLink = new HttpLink({
-  uri: 'https://creative-dane-85.hasura.app/v1/graphql',
+  uri: process.env.REACT_APP_HASURA_URI,
   headers: {
-    'x-hasura-admin-secret':
-      'sOz6nXnWQozNUeAhyRE9aqfEy3dnyJdFLtwjYuXmuFShou4yIzq1vmq7DOMcEfNn',
+    'x-hasura-admin-secret': process.env.REACT_APP_HASURA_KEY,
   },
 });
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: 'wss://creative-dane-85.hasura.app/v1/graphql',
+    url: 'wss://on-firefly-85.hasura.app/v1/graphql',
     connectionParams: {
       headers: {
-        'x-hasura-admin-secret':
-          'sOz6nXnWQozNUeAhyRE9aqfEy3dnyJdFLtwjYuXmuFShou4yIzq1vmq7DOMcEfNn',
+        'x-hasura-admin-secret': process.env.REACT_APP_HASURA_KEY,
       },
     },
   })

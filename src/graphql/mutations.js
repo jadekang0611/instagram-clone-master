@@ -11,7 +11,7 @@ export const CREATE_USER = gql`
     $profileImage: String!
     $phoneNumber: String!
   ) {
-    insert_users(
+    insert_instagram_users(
       objects: {
         user_id: $userId
         username: $username
@@ -34,18 +34,17 @@ export const EDIT_USER = gql`
     $name: String!
     $username: String!
     $website: String!
-    # $bio: String!
-    $email: String! # $phoneNumber: String!
+    $email: String!
+    $bio: String!
   ) {
-    update_users(
+    update_instagram_users(
       where: { id: { _eq: $id } }
       _set: {
         name: $name
         username: $username
         website: $website
-        # bio: $bio
+        bio: $bio
         email: $email
-        # phone_number: $phoneNumber
       }
     ) {
       affected_rows
@@ -55,7 +54,7 @@ export const EDIT_USER = gql`
 
 export const EDIT_USER_AVATAR = gql`
   mutation editUser($id: uuid!, $profileImage: String!) {
-    update_users(
+    update_instagram_users(
       where: { id: { _eq: $id } }
       _set: { profile_image: $profileImage }
     ) {

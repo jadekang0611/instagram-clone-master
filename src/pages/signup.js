@@ -62,7 +62,8 @@ function SignUpPage() {
       query: CHECK_IF_USERNAME_TAKEN,
       variables,
     });
-    const isUsernameValid = response.data.users.length === 0;
+    console.log(response);
+    const isUsernameValid = response.data.instagram_users.length === 0;
     return isUsernameValid;
   }
 

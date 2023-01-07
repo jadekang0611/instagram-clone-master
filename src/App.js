@@ -52,7 +52,7 @@ function App() {
   }
 
   const isModalOpen = modal && prevLocation.current !== location;
-  const me = isAuth && data ? data.users[0] : null;
+  const me = isAuth && data ? data.instagram_users[0] : null;
   const currentUserId = me.id;
 
   return (

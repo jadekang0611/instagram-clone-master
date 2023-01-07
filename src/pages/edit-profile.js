@@ -134,7 +134,9 @@ function EditProfilePage({ history }) {
           </Hidden>
         </nav>
         <main>
-          {path.includes('edit') && <EditUserInfo user={data.users_by_pk} />}
+          {path.includes('edit') && (
+            <EditUserInfo user={data.instagram_users_by_pk} />
+          )}
         </main>
       </section>
     </Layout>
@@ -167,6 +169,7 @@ function EditUserInfo({ user }) {
   }
 
   async function handleError(error) {
+    console.log(error);
     if (error.message.includes('users_username_key')) {
       setError({
         type: 'username',
@@ -211,7 +214,7 @@ function EditUserInfo({ user }) {
         </div>
       </div>
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-        <SelectionItem
+        <SectionItem
           text='Name'
           formItem={user.name}
           name='name'
@@ -231,7 +234,7 @@ function EditUserInfo({ user }) {
             Facebook to change your name.
           </Typography>
         </div>
-        <SelectionItem
+        <SectionItem
           text='Username'
           error={error}
           formItem={user.username}
@@ -253,7 +256,7 @@ function EditUserInfo({ user }) {
             dandy_jadie for another 14 days.
           </Typography>
         </div>
-        <SelectionItem
+        <SectionItem
           text='Website'
           formItem={user.website}
           name='website'
@@ -277,24 +280,19 @@ function EditUserInfo({ user }) {
             app and edit your profile to change the websites in your bio.
           </Typography>
         </div>
-        <div className={classes.sectionItem}>
-          <aside>
-            <Typography className={classes.bio}>Bio</Typography>
-          </aside>
-          <TextField
-            name='bio'
-            register={register('bio', {
-              required: false,
-              maxLength: 120,
-            })}
-            variant='outlined'
-            multiline
-            maxRows={3}
-            minRows={3}
-            fullWidth
-            defaultValue={user.bio}
-          />
-        </div>
+
+        <SectionItem
+          text='Bio'
+          name='bio'
+          register={register('bio', {
+            maxLength: 120,
+          })}
+          variant='outlined'
+          fullWidth
+          formItem={user.bio}
+          multiline={true}
+          rows={2}
+        />
         <div className={classes.sectionItem}>
           <div />
           <Typography
@@ -311,7 +309,7 @@ function EditUserInfo({ user }) {
           </Typography>
         </div>
 
-        <SelectionItem
+        <SectionItem
           text='Email'
           error={error}
           formItem={user.email}
@@ -319,15 +317,6 @@ function EditUserInfo({ user }) {
           register={register('email', {
             required: true,
             validate: (input) => isEmail(input),
-          })}
-        />
-        <SelectionItem
-          text='Phone number'
-          formItem={user.phone_number}
-          name='phone_number'
-          ref={register('phone_number', {
-            required: false,
-            validate: (input) => (Boolean(input) ? isMobilePhone(input) : true),
           })}
         />
         <div className={classes.sectionItem}>
@@ -352,13 +341,15 @@ function EditUserInfo({ user }) {
     </section>
   );
 }
-function SelectionItem({
+function SectionItem({
   type = 'text',
   text,
   formItem,
   register,
   error,
   name,
+  multiline,
+  rows,
 }) {
   const classes = useEditProfilePageStyles();
   return (
@@ -374,6 +365,8 @@ function SelectionItem({
         </Hidden>
       </aside>
       <TextField
+        multiline={multiline}
+        rows={rows}
         name={name}
         {...register}
         helperText={error?.type === name && error.message}
