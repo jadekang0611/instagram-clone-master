@@ -8,7 +8,7 @@ function PostPage() {
   const { postId } = useParams();
   return (
     <Layout>
-      <Post id={postId} />
+      <Post postId={postId} />
       <MorePostsFromUser />
     </Layout>
   );

@@ -13,6 +13,7 @@ import {
 import { Link } from 'react-router-dom';
 import PostSkeleton from './PostSkeleton';
 import {
+  Avatar,
   Button,
   Divider,
   Hidden,
@@ -20,24 +21,41 @@ import {
   Typography,
 } from '@material-ui/core';
 import OptionsDialog from '../shared/OptionsDialog';
-import { defaultPost } from '../../data';
+import { useMutation, useSubscription } from '@apollo/client';
+import { GET_POST } from '../../graphql/subscriptions';
+import { UserContext } from '../../App';
+import { LIKE_POST, UNLIKE_POST } from '../../graphql/mutations';
 
-function Post() {
+function Post({ postId }) {
   const classes = usePostStyles();
-  const [loading, setLoading] = React.useState(true);
-  const [showOptionsDialog, setShowOptionsDialog] = React.useState(false);
-  const { id, media, likes, user, caption, comments } = defaultPost;
 
-  setTimeout(() => setLoading(false), 2000);
+  const [showOptionsDialog, setShowOptionsDialog] = React.useState(false);
+  const variables = { postId };
+
+  const { data, loading } = useSubscription(GET_POST, { variables });
 
   if (loading) return <PostSkeleton />;
+  const {
+    id,
+    media,
+    likes,
+    likes_aggregate,
+    user,
+    caption,
+    comments,
+    created_at,
+    saved_posts,
+    location,
+  } = data.posts_by_pk;
+
+  const likesCount = likes_aggregate.aggregate.count;
 
   return (
     <div className={classes.postContainer}>
       <article className={classes.article}>
         {/* Post Header */}
         <div className={classes.postHeader}>
-          <UserCard user={user} avatarSize={32} />
+          <UserCard user={user} location={location} avatarSize={32} />
           <MoreIcon
             className={classes.moreIcon}
             onClick={() => setShowOptionsDialog(true)}
@@ -49,7 +67,7 @@ function Post() {
         {/* Post Buttons */}
         <div className={classes.postButtonsWrapper}>
           <div className={classes.postButtons}>
-            <LikeButton />
+            <LikeButton likes={likes} postId={id} authorId={user.id} />
             <Link to={`/p/${id}`}>
               <CommentIcon />
             </Link>
@@ -57,31 +75,22 @@ function Post() {
             <SaveButton />
           </div>
           <Typography className={classes.likes} variant='subtitle2'>
-            <span>{likes === 1 ? '1 like' : `${likes} likes`}</span>
+            <span>{likesCount === 1 ? '1 like' : `${likesCount} likes`}</span>
           </Typography>
-          <div className={classes.postCaptionContainer}>
-            <Typography
-              variant='body2'
-              component='span'
-              className={classes.postCaption}
-              dangerouslySetInnerHTML={{ __html: caption }}
+          <div
+            style={{
+              overflowY: 'scroll',
+              padding: '16px 12px',
+              height: '100%',
+            }}
+          >
+            <AuthorCaption
+              user={user}
+              createdAt={created_at}
+              caption={caption}
             />
-
             {comments.map((comment) => (
-              <div key={comment.id}>
-                <Link to={`/${comment.user.username}`} className={classes.link}>
-                  <Typography
-                    className={classes.commentUsername}
-                    variant='subtitle2'
-                    component='span'
-                  >
-                    {comment.user.username}
-                  </Typography>
-                  <Typography variant='body2' component='span'>
-                    {comment.content}
-                  </Typography>
-                </Link>
-              </div>
+              <UserComment key={comment.id} comment={comment} />
             ))}
           </div>
           <Typography color='textSecondary' className={classes.datePosted}>
@@ -102,19 +111,108 @@ function Post() {
   );
 }
 
-function LikeButton() {
+function AuthorCaption({ user, caption, createdAt }) {
   const classes = usePostStyles();
-  const [liked, setLiked] = React.useState(false);
+
+  return (
+    <div style={{ display: 'flex' }}>
+      <Avatar
+        src={user.profile_image}
+        alt='User avatar'
+        style={{ marginRight: 14, width: 32, height: 32 }}
+      />
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <Link to={user.username}>
+          <Typography
+            variant='subtitle2'
+            component='span'
+            className={classes.username}
+          >
+            {user.username}
+          </Typography>
+          <Typography
+            variant='body2'
+            component='span'
+            className={classes.postCaption}
+            style={{ paddingLeft: 0 }}
+            dangerouslySetInnerHTML={{ __html: caption }}
+          />
+        </Link>
+        <Typography
+          style={{ marginTop: 16, marginBottom: 4, display: 'inline-block' }}
+          color='textSecondary'
+          variant='caption'
+        >
+          {createdAt}
+        </Typography>
+      </div>
+    </div>
+  );
+}
+
+function UserComment({ comment }) {
+  const classes = usePostStyles();
+  return (
+    <div style={{ display: 'flex' }}>
+      <Avatar
+        src={comment.user.profile_image}
+        alt='User avatar'
+        style={{ marginRight: 14, width: 32, height: 32 }}
+      />
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <Link to={comment.user.username}>
+          <Typography
+            variant='subtitle2'
+            component='span'
+            className={classes.username}
+          >
+            {comment.user.username}
+          </Typography>
+          <Typography
+            variant='body2'
+            component='span'
+            className={classes.postCaption}
+            style={{ paddingLeft: 0 }}
+          >
+            {comment.content}
+          </Typography>
+        </Link>
+        <Typography
+          style={{ marginTop: 16, marginBottom: 4, display: 'inline-block' }}
+          color='textSecondary'
+          variant='caption'
+        >
+          {comment.createdAt}
+        </Typography>
+      </div>
+    </div>
+  );
+}
+
+function LikeButton({ likes, authorId, postId }) {
+  const classes = usePostStyles();
+  const { currentUserId } = React.useContext(UserContext);
+  const isAlreadyLiked = likes.some(({ user_id }) => user_id === currentUserId);
+  const [liked, setLiked] = React.useState(isAlreadyLiked);
   const Icon = liked ? UnlikeIcon : LikeIcon;
   const className = liked ? classes.liked : classes.like;
   const onClick = liked ? handleUnlike : handleLike;
+  const [likePost] = useMutation(LIKE_POST);
+  const [unlikePost] = useMutation(UNLIKE_POST);
+  const variables = {
+    postId,
+    userId: currentUserId,
+    // profileId: authorId
+  };
 
   function handleLike() {
     setLiked(true);
+    likePost({ variables });
   }
 
   function handleUnlike() {
     setLiked(false);
+    unlikePost({ variables });
   }
   return <Icon className={className} onClick={onClick} />;
 }
