@@ -12,6 +12,20 @@ export const ME = gql`
       bio
       phone_number
       website
+      notifications(order_by: { created_at: desc }) {
+        id
+        type
+        created_at
+        post {
+          id
+          media
+        }
+        user {
+          id
+          username
+          profile_image
+        }
+      }
     }
   }
 `;

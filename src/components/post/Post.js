@@ -31,6 +31,7 @@ import {
   UNLIKE_POST,
   UNSAVE_POST,
 } from '../../graphql/mutations';
+import { formatDateToNowShort, formatPostDate } from '../../utils/formatDate';
 
 function Post({ postId }) {
   const classes = usePostStyles();
@@ -100,7 +101,7 @@ function Post({ postId }) {
             ))}
           </div>
           <Typography color='textSecondary' className={classes.datePosted}>
-            5 DAYS AGO
+            {formatPostDate(created_at)}
           </Typography>
           <Hidden xsDown>
             <div className={classes.comment}>
@@ -149,7 +150,7 @@ function AuthorCaption({ user, caption, createdAt }) {
           color='textSecondary'
           variant='caption'
         >
-          {createdAt}
+          {formatDateToNowShort(createdAt)}
         </Typography>
       </div>
     </div>
@@ -188,7 +189,7 @@ function UserComment({ comment }) {
           color='textSecondary'
           variant='caption'
         >
-          {comment.createdAt}
+          {formatDateToNowShort(comment.createdAt)}
         </Typography>
       </div>
     </div>
@@ -208,7 +209,7 @@ function LikeButton({ likes, authorId, postId }) {
   const variables = {
     postId,
     userId: currentUserId,
-    // profileId: authorId
+    profileId: authorId,
   };
 
   function handleLike() {
