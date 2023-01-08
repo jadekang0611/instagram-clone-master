@@ -1,5 +1,6 @@
 import { Typography, Hidden } from '@material-ui/core';
 import React from 'react';
+
 import { useExploreSuggestionsStyles } from '../../styles';
 import FollowSuggestions from '../shared/FollowSuggestions';
 

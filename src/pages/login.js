@@ -45,7 +45,8 @@ function LoginPage() {
         input = await getUserEmail(input);
       }
       await loginWithEmailAndPassword(input, password);
-      setTimeout(() => history.push('/'), 0);
+      // setTimeout(() => history.push('/'), 2000);
+      history.push('/');
     } catch (error) {
       console.log('Error logging in', error);
       handleError(error);
@@ -64,7 +65,7 @@ function LoginPage() {
       query: GET_USER_EMAIL,
       variables,
     });
-    const userEmail = response.data.users[0]?.email || 'no@email.com';
+    const userEmail = response.data.instagram_users[0]?.email || 'no@email.com';
     return userEmail;
   }
 
@@ -91,6 +92,7 @@ function LoginPage() {
                 label='Username, email, or phone'
                 margin='dense'
                 className={classes.textField}
+                autoComplete
               />
               <TextField
                 name='password'
@@ -113,6 +115,7 @@ function LoginPage() {
                 type={showPassword ? 'text' : 'password'}
                 margin='dense'
                 className={classes.textField}
+                autoComplete
               />
               <Button
                 disabled={!isValid || isSubmitting}

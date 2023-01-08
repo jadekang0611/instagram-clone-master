@@ -19,7 +19,7 @@ import { GearIcon } from '../icons';
 import FollowButton from '../components/shared/FollowButton';
 import ProfileTabs from '../components/profile/ProfileTabs';
 import { AuthContext } from '../auth';
-import { useMutation, useQuery } from '@apollo/client';
+import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { GET_USER_PROFILE } from '../graphql/queries';
 import LoadingScreen from '../components/shared/LoadingScreen';
 import { UserContext } from '../App';
@@ -319,10 +319,13 @@ function OptionsMenu({ handleCloseMenu }) {
 
   const [showLogOutMessage, setLogOutMessage] = React.useState(false);
 
+  const client = useApolloClient();
+
   const history = useHistory();
   function handleLogOutClick() {
     setLogOutMessage(true);
-    setTimeout(() => {
+    setTimeout(async () => {
+      await client.clearStore();
       signOut();
       history.push('/accounts/login');
     }, 2000);

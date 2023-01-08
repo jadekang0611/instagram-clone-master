@@ -2,13 +2,21 @@ import { Typography } from '@material-ui/core';
 import React from 'react';
 import { useExploreGridStyles } from '../../styles';
 import { LoadingLargeIcon } from '../../icons';
-import { getDefaultPost } from '../../data';
 import GridPost from '../shared/GridPost';
+import { useQuery } from '@apollo/client';
+import { EXPLORE_POSTS } from '../../graphql/queries';
+import { UserContext } from '../../App';
+import LoadingScreen from '../shared/LoadingScreen';
 
 function ExploreGrid() {
   const classes = useExploreGridStyles();
+  const { followingIds } = React.useContext(UserContext);
+  const variables = {
+    followingIds,
+  };
+  const { data, loading } = useQuery(EXPLORE_POSTS, { variables });
 
-  let loading = false;
+  if (loading) return <LoadingScreen />;
   return (
     <>
       <Typography
@@ -25,7 +33,7 @@ function ExploreGrid() {
       ) : (
         <article className={classes.article}>
           <div className={classes.postContainer}>
-            {Array.from({ length: 20 }, () => getDefaultPost()).map((post) => (
+            {data.posts.map((post) => (
               <GridPost key={post.id} post={post} />
             ))}
           </div>

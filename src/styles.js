@@ -665,6 +665,10 @@ export const useFeedPostStyles = makeStyles((theme) => ({
 }));
 
 export const usePostStyles = makeStyles((theme) => ({
+  link: {
+    textDecoration: 'none',
+    color: 'black',
+  },
   moreIcon: {
     height: 24,
     width: 18,
@@ -1797,7 +1801,7 @@ export const useAddPostDialogStyles = makeStyles((theme) => ({
     fontWeight: 600,
   },
   paper: {
-    display: 'flex',
+    display: 'flex !important',
     alignItems: 'flex-start',
     '& > *': {
       margin: theme.spacing(1),
