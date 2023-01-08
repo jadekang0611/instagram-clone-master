@@ -100,3 +100,40 @@ export const UNLIKE_POST = gql`
     }
   }
 `;
+
+export const SAVE_POST = gql`
+  mutation savePost($postId: uuid!, $userId: uuid!) {
+    insert_saved_posts(objects: { post_id: $postId, user_id: $userId }) {
+      affected_rows
+    }
+  }
+`;
+
+export const UNSAVE_POST = gql`
+  mutation unsavePost($postId: uuid!, $userId: uuid!) {
+    delete_saved_posts(
+      where: { post_id: { _eq: $postId }, user_id: { _eq: $userId } }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
+export const CREATE_COMMENT = gql`
+  mutation createComment($postId: uuid!, $userId: uuid!, $content: String!) {
+    insert_comments(
+      objects: { post_id: $postId, user_id: $userId, content: $content }
+    ) {
+      returning {
+        id
+        created_at
+        post_id
+        user_id
+        content
+        user {
+          username
+        }
+      }
+    }
+  }
+`;

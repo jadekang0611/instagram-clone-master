@@ -25,9 +25,9 @@ export const GET_POST = gql`
       media
       location
       user {
-        name
         id
         username
+        name
         profile_image
       }
       likes_aggregate {
@@ -43,9 +43,8 @@ export const GET_POST = gql`
         id
         user_id
       }
-      comments(
-        order_by: { created_at: desc, id: asc, user: { username: asc } }
-      ) {
+      comments(order_by: { created_at: desc }) {
+        id
         content
         created_at
         user {
