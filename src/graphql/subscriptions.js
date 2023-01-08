@@ -22,9 +22,6 @@ export const ME = gql`
           user_id
         }
       }
-      bio
-      phone_number
-      website
       notifications(order_by: { created_at: desc }) {
         id
         type

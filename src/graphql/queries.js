@@ -121,7 +121,7 @@ export const GET_USER_PROFILE = gql`
   }
 `;
 
-export const SUGGEST_USER = gql`
+export const SUGGEST_USERS = gql`
   query suggestUsers(
     $limit: Int!
     $followerIds: [uuid!]!
@@ -200,6 +200,54 @@ export const GET_POST = gql`
       user {
         id
         username
+      }
+    }
+  }
+`;
+
+export const GET_FEED = gql`
+  query getFeed($limit: Int!, $feedIds: [uuid!]!) {
+    posts(
+      limit: $limit
+      where: { user_id: { _in: $feedIds } }
+      order_by: { created_at: desc }
+    ) {
+      id
+      caption
+      created_at
+      media
+      location
+      user {
+        id
+        username
+        name
+        profile_image
+      }
+      likes_aggregate {
+        aggregate {
+          count
+        }
+      }
+      likes {
+        id
+        user_id
+      }
+      saved_posts {
+        id
+        user_id
+      }
+      comments_aggregate {
+        aggregate {
+          count
+        }
+      }
+      comments(order_by: { created_at: desc }, limit: 2) {
+        id
+        content
+        created_at
+        user {
+          username
+        }
       }
     }
   }

@@ -8,7 +8,7 @@ import { useFollowSuggestionsStyles } from '../../styles';
 import { Link } from 'react-router-dom';
 import FollowButton from './FollowButton';
 import { UserContext } from '../../App';
-import { SUGGEST_USER } from '../../graphql/queries';
+import { SUGGEST_USERS } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
 
 function FollowSuggestions({ hideHeader }) {
@@ -18,7 +18,7 @@ function FollowSuggestions({ hideHeader }) {
     followerIds,
     createdAt: me.created_at,
   };
-  const { data, loading } = useQuery(SUGGEST_USER, { variables });
+  const { data, loading } = useQuery(SUGGEST_USERS, { variables });
   const classes = useFollowSuggestionsStyles();
 
   return (

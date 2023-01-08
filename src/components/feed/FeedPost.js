@@ -21,13 +21,30 @@ import {
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import FollowSuggestions from '../shared/FollowSuggestions';
 import OptionsDialog from '../shared/OptionsDialog';
+import { GET_FEED } from '../../graphql/queries';
+import { useMutation } from '@apollo/client';
+import { UserContext } from '../../App';
 
 function FeedPost({ post, index }) {
   const classes = useFeedPostStyles();
   const [showCaption, setCaption] = React.useState(false);
   const [showOptionsDialog, setShowOptionsDialog] = React.useState(false);
-  const { id, media, likes, user, caption, comments } = post;
+  const {
+    id,
+    media,
+    likes,
+    user,
+    caption,
+    comments,
+    likes_aggregate,
+    saved_posts,
+    location,
+    comments_aggregate,
+  } = post;
   const showFollowSuggestions = index === 1;
+
+  const likesCount = likes_aggregate.aggregate.count;
+  const commentsCount = comments_aggregate.aggregate.count;
 
   return (
     <>
@@ -37,7 +54,7 @@ function FeedPost({ post, index }) {
       >
         {/* Feed Post Header */}
         <div className={classes.postHeader}>
-          <UserCard user={user} />
+          <UserCard user={user} location={location} />
           <MoreIcon
             className={classes.moreIcon}
             onClick={() => setShowOptionsDialog(true)}
@@ -135,7 +152,7 @@ function FeedPost({ post, index }) {
   );
 }
 
-function LikeButton() {
+function LikeButton({ likes, postId }) {
   const classes = useFeedPostStyles();
   const [liked, setLiked] = React.useState(false);
   const Icon = liked ? UnlikeIcon : LikeIcon;
