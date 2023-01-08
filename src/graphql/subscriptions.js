@@ -9,6 +9,18 @@ export const ME = gql`
       username
       profile_image
       last_checked
+      followers {
+        user {
+          id
+          user_id
+        }
+      }
+      following {
+        user {
+          id
+          user_id
+        }
+      }
       bio
       phone_number
       website

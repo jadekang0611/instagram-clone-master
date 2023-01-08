@@ -181,7 +181,10 @@ function EditUserInfo({ user }) {
   }
 
   async function handleUpdateProfilePic(event) {
-    const url = await handleImageUpload(event.target.files[0]);
+    const url = await handleImageUpload(
+      event.target.files[0],
+      'instagram-avatar'
+    );
     const variables = { id: user.id, profileImage: url };
     await editAvatar({ variables });
     setProfileImage(url);

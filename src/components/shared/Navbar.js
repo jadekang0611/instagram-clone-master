@@ -96,7 +96,7 @@ function Search({ history }) {
     const variables = { query: `%${query}%` };
     searchUsers({ variables });
     if (data) {
-      setResults(data.users);
+      setResults(data.instagram_users);
       setLoading(false);
     }
     // setResults(Array.from({ length: 5 }, () => getDefaultUser()));

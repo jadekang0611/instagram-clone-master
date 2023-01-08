@@ -62,3 +62,61 @@ export const GET_POSTS = gql`
     }
   }
 `;
+
+export const GET_USER_PROFILE = gql`
+  query getUserProfile($username: String!) {
+    instagram_users(where: { username: { _eq: $username } }) {
+      id
+      name
+      username
+      bio
+      website
+      profile_image
+      posts_aggregate {
+        aggregate {
+          count
+        }
+      }
+      followers_aggregate {
+        aggregate {
+          count
+        }
+      }
+      following_aggregate {
+        aggregate {
+          count
+        }
+      }
+      saved_posts(order_by: { created_at: desc }) {
+        post {
+          id
+          media
+          likes_aggregate {
+            aggregate {
+              count
+            }
+          }
+          comments_aggregate {
+            aggregate {
+              count
+            }
+          }
+        }
+      }
+      posts(order_by: { created_at: desc }) {
+        id
+        media
+        likes_aggregate {
+          aggregate {
+            count
+          }
+        }
+        comments_aggregate {
+          aggregate {
+            count
+          }
+        }
+      }
+    }
+  }
+`;

@@ -1,7 +1,7 @@
-async function handleImageUpload(image) {
+async function handleImageUpload(image, uploadPreset = 'instagram-clone') {
   const data = new FormData();
   data.append('file', image);
-  data.append('upload_preset', 'instagram-clone');
+  data.append('upload_preset', uploadPreset);
   data.append('cloud_name', 'dkn08dypf');
   const response = await fetch(
     'https://api.cloudinary.com/v1_1/dkn08dypf/image/upload',

@@ -54,9 +54,12 @@ function App() {
   const isModalOpen = modal && prevLocation.current !== location;
   const me = isAuth && data ? data.instagram_users[0] : null;
   const currentUserId = me.id;
-
+  const followingIds = me.following.map(({ user }) => user.id);
+  const followerIds = me.followers.map(({ user }) => user.id);
   return (
-    <UserContext.Provider value={{ me, currentUserId }}>
+    <UserContext.Provider
+      value={{ me, currentUserId, followerIds, followingIds }}
+    >
       <Switch location={isModalOpen ? prevLocation.current : location}>
         <Route exact path='/' component={FeedPage} />
         <Route path='/explore' component={ExplorePage} />
