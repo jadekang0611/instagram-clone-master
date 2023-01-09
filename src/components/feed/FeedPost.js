@@ -197,7 +197,7 @@ function Comment() {
         multiline
         maxRows={2}
         minRows={1}
-        onChange={(event) => setContent(event.target.event)}
+        onChange={(event) => setContent(event.target.value)}
         className={classes.textField}
         InputProps={{
           classes: { root: classes.root, underline: classes.underline },

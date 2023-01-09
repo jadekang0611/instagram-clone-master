@@ -167,7 +167,7 @@ function UserComment({ comment }) {
         style={{ marginRight: 14, width: 32, height: 32 }}
       />
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Link to={comment.user.username}>
+        <Link to={comment.user.username} className={classes.link}>
           <Typography
             variant='subtitle2'
             component='span'
@@ -175,21 +175,21 @@ function UserComment({ comment }) {
           >
             {comment.user.username}
           </Typography>
-          <Typography
-            variant='body2'
-            component='span'
-            className={classes.postCaption}
-            style={{ paddingLeft: 0 }}
-          >
-            {comment.content}
-          </Typography>
         </Link>
+        <Typography
+          variant='body2'
+          component='span'
+          className={classes.postCaption}
+          style={{ paddingLeft: 0 }}
+        >
+          {comment.content}
+        </Typography>
         <Typography
           style={{ marginTop: 16, marginBottom: 4, display: 'inline-block' }}
           color='textSecondary'
           variant='caption'
         >
-          {formatDateToNowShort(comment.createdAt)}
+          {formatDateToNowShort(comment.created_at)}
         </Typography>
       </div>
     </div>
@@ -276,7 +276,7 @@ function Comment({ postId }) {
         multiline
         maxRows={2}
         minRows={1}
-        onChange={(event) => setContent(event.target.event)}
+        onChange={(event) => setContent(event.target.value)}
         className={classes.textField}
         InputProps={{
           classes: { root: classes.root, underline: classes.underline },

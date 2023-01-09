@@ -11,17 +11,34 @@ import FeedPostSkeleton from '../components/feed/FeedPostSkeleton';
 import { UserContext } from '../App';
 import { useQuery } from '@apollo/client';
 import { GET_FEED } from '../graphql/queries';
+import usePageBottom from '../utils/usePageBottom';
 const FeedPost = React.lazy(() => import('../components/feed/FeedPost'));
 
 function FeedPage() {
   const classes = useFeedPageStyles();
   const { me, feedIds } = React.useContext(UserContext);
-  const [isEndOfFeed] = React.useState(false);
+  const [isEndOfFeed, setEndOfFeed] = React.useState(false);
   const variables = { feedIds, limit: 2 };
-  const { data, loading } = useQuery(GET_FEED, { variables });
-  console.log({ data });
+  const { data, loading, fetchMore } = useQuery(GET_FEED, { variables });
+  const isPageBottom = usePageBottom();
 
-  console.log(feedIds);
+  function handleUpdateQuery(prev, { fetchMoreResult }) {
+    if (fetchMoreResult.posts.length === 0) {
+      setEndOfFeed(true);
+      return prev;
+    }
+    return { posts: [...prev.posts, ...fetchMoreResult.posts] };
+  }
+
+  React.useEffect(() => {
+    if (!isPageBottom || !data) return;
+    const lastTimestamp = data.posts[data.posts.length - 1].create_at;
+    const variables = { feedIds, limit: 2, lastTimestamp };
+    fetchMore({
+      variables,
+      updateQuery: handleUpdateQuery,
+    });
+  }, [isPageBottom, data, fetchMore, handleUpdateQuery]);
 
   if (loading) return <LoadingScreen />;
 
@@ -29,9 +46,9 @@ function FeedPage() {
     <Layout>
       <div className={classes.container}>
         <div>
-          {data?.posts?.map((post, index) => (
+          {data.posts.map((post, index) => (
             <React.Suspense key={post.id} fallback={<FeedPostSkeleton />}>
-              <FeedPost key={post.id} post={post} index={index} />
+              <FeedPost key={post.id} index={index} post={post} />
             </React.Suspense>
           ))}
         </div>
