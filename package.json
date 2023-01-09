@@ -16,6 +16,7 @@
     "graphql-ws": "^5.11.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-graceful-image": "^1.5.0",
     "react-helmet": "^5.2.1",
     "react-hook-form": "^7.41.2",
     "react-lines-ellipsis": "^0.14.1",

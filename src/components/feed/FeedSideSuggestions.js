@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFeedSideSuggestionsStyles } from '../../styles';
 import { Paper, Typography } from '@material-ui/core';
-// import { getDefaultUser } from "../../data";
 import UserCard from '../shared/UserCard';
 import FollowButton from '../shared/FollowButton';
 import { LoadingIcon } from '../../icons';
@@ -14,8 +13,6 @@ function FeedSideSuggestions() {
   const { me, followerIds } = React.useContext(UserContext);
   const variables = { limit: 5, followerIds, createdAt: me.created_at };
   const { data, loading } = useQuery(SUGGEST_USERS, { variables });
-
-  // let loading = false;
 
   return (
     <article className={classes.article}>
@@ -33,7 +30,7 @@ function FeedSideSuggestions() {
         {loading ? (
           <LoadingIcon />
         ) : (
-          data.users.map((user) => (
+          data.instagram_users.map((user) => (
             <div key={user.id} className={classes.card}>
               <UserCard user={user} />
               <FollowButton id={user.id} side />
